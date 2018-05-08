@@ -18,9 +18,17 @@ public class BallScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Wall")
+
+        GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * Speed;
+
+        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.y) < 5)
         {
-            GetComponent<Rigidbody>().velocity = 
+            GetComponent<Rigidbody>().velocity =new Vector3(GetComponent<Rigidbody>().velocity.x, GetComponent<Rigidbody>().velocity.y * 5, GetComponent<Rigidbody>().velocity.z);
+        }
+
+        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.x) < 5)
+        {
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x *5 , GetComponent<Rigidbody>().velocity.y, GetComponent<Rigidbody>().velocity.z);
         }
     }
 }
