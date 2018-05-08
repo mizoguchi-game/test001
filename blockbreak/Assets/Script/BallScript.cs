@@ -15,4 +15,12 @@ public class BallScript : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce((transform.forward + transform.right) * Speed, ForceMode.VelocityChange);
         }
 	}
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "Wall")
+        {
+            GetComponent<Rigidbody>().velocity = 
+        }
+    }
 }
