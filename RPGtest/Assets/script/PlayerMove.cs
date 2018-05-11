@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour {
             }
         }
 
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetBool("jumping",true);
             rb.AddForce(new Vector3(0,thrust,0));
