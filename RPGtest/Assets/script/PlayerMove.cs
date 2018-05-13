@@ -6,9 +6,13 @@ public class PlayerMove : MonoBehaviour {
 
     Rigidbody rb;
 
-    public float speed = 2f;
-    public float thrust = 2;
+    public float Walk = 2f;
+    public float Run = 4f;
+    public float thrust = -2;
+    public float rotateSpeed = 2;
 
+    private Vector3 velocity;
+    private float speed = 0f;
     private Animator animator;
 
     bool ground;
@@ -20,48 +24,41 @@ public class PlayerMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate() {
         if (ground)
-        {
-            if (Input.GetKey(KeyCode.RightArrow))
+        { 
+
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+
+            if((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && v > 0.1)
             {
-                rb.velocity = new Vector3(speed, 0, 0);
-                transform.rotation = Quaternion.Euler(0, 90, 0);
-                animator.SetBool("Running", true);
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                rb.velocity = new Vector3(-speed, 0, 0);
-                transform.rotation = Quaternion.Euler(0, 270, 0);
-                animator.SetBool("Running", true);
-            }
-            else if (Input.GetKey(KeyCode.UpArrow))
-            {
-                rb.velocity = new Vector3(0, 0, speed);
-                transform.rotation = Quaternion.Euler(0,0,0);
-                animator.SetBool("Running",true);
-            }
-            else if(Input.GetKey(KeyCode.DownArrow))
-            {
-                rb.velocity = new Vector3(0, 0, -speed);
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                animator.SetBool("Running",true);
+                speed = v * Run;
             }
             else
             {
-                animator.SetBool("Running",false);
+                speed = v * Walk;
             }
+
+            transform.Rotate(0f, h * rotateSpeed, 0f);
+            animator.SetFloat("Walking", Mathf.Abs(speed));
+
+            velocity = new Vector3(0, 0, speed);
+            velocity = transform.TransformDirection(velocity);
+            rb.velocity = velocity;
+
+            rb.angularVelocity = new Vector3(0f, 0f, 0f);
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetBool("jumping",true);
+            animator.SetBool("Junping",true);
             rb.AddForce(new Vector3(0,thrust,0));
             ground = false;
         }
         else
         {
-            animator.SetBool("jumping", false);
+            animator.SetBool("Junping", false);
         }
 	}
 
