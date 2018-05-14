@@ -12,9 +12,12 @@ public class EquipmentManeger : MonoBehaviour {
     // Use this for initialization
     void Start () {
         var children = GetComponentsInChildren<Transform>(true);
-        foreach(var transfom in children)
+        foreach (var transfom in children)
         {
-            m_WeaponPoint = transfom.gameObject;
+            if (transfom.name == WeaponPoint)
+            {
+                m_WeaponPoint = transfom.gameObject;
+            }
         }
 	}
 	

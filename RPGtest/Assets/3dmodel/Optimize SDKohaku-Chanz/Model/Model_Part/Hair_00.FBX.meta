@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: bf18897df5add8b4eb7ed683cce25218
-timeCreated: 1509730376
-licenseType: Store
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -194,6 +192,7 @@ ModelImporter:
     4300000: hair_00
     9500000: //RootNode
     13700000: hair_00
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -213,6 +212,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
