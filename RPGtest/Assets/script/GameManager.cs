@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour {
 
     private string[] m_weaponsPath = new string[]
     {
-        "./Assets/sword",
-        "./Assets/staff"
+        "sword",
+        "staff"
     };
 
     private float m_kayInterval = 0f;
