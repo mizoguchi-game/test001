@@ -10,9 +10,6 @@ public class MoveEnemy : MonoBehaviour
     private float walkspeed = 1.0f;
     private Vector3 velocity;
     private Vector3 direction;
-    private bool arrived;
-    private Vector3 startPosition;
-
     private SetPosition setPosition;
     //ウェイトタイムの指定
     private float waitTime = 5f;
@@ -28,7 +25,7 @@ public class MoveEnemy : MonoBehaviour
     };
 
     //Enemyの状態
-    private EnamyState State;
+    private EnamyState state;
     //
     private Transform PlayerTransform;
 
@@ -41,10 +38,6 @@ public class MoveEnemy : MonoBehaviour
         setPosition.CreateRandomPosition();
         //移動速度を0クリア
         velocity = Vector3.zero;
-        //到着フラグをfalseで初期化
-        arrived = false;
-        //現在位置をオブジェクトの位置から取得
-        startPosition = transform.position;
         //経過時間をリセット
         elapsedtime = 0f;
         SetState("wait");
@@ -52,66 +45,66 @@ public class MoveEnemy : MonoBehaviour
 
     void Update()
     {
-        if (!arrived)
+        if (state == EnamyState.Walk || state == EnamyState.Chase)
         {
+            if (state == EnamyState.Chase)
+            {
+                setPosition.SetDestination(PlayerTransform.position);
+            }
+
             if (enemyController.isGrounded)
             {
                 velocity = Vector3.zero;
                 direction = (destination - transform.position).normalized;
                 transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
                 velocity = direction * walkspeed;
-                Debug.Log(destination);
             }
-            velocity.y += Physics.gravity.y * Time.deltaTime;
-            enemyController.Move(velocity * Time.deltaTime);
-
             //目的地に到着したかどうかの判定
-            if (Vector3.Distance(transform.position,destination) < 0.5f)
+            if (Vector3.Distance(transform.position, setPosition.GetDestination()) < 0.5f)
             {
-                arrived = true;
-            }
+                SetState("wait");
+            } 
         }
-        else
+        else if(state == EnamyState.Wait)
         {
             elapsedtime += Time.deltaTime;
 
             if (elapsedtime > waitTime)
             {
-                setPosition.CreateRandomPosition();
-                destination = setPosition.GetDestination();
-                arrived = false;
-                elapsedtime = 0;
+                SetState("walk");
             }
-            Debug.Log(elapsedtime);
         }
+
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+        enemyController.Move(velocity * Time.deltaTime);
     }
 
     public void SetState(string mode,Transform obj = null)
     {
         if(mode == "walk")
         {
-            arrived = false;
+
             elapsedtime = 0f;
-            State = EnamyState.Walk;
+            state = EnamyState.Walk;
             setPosition.CreateRandomPosition();
         }
         else if(mode == "Chase")
         {
-            State = EnamyState.Chase;
-            arrived = false;
+            state = EnamyState.Chase;
+ 
             PlayerTransform = obj;
         }else if (mode == "wait")
         {
             elapsedtime = 0f;
-            State = EnamyState.Wait;
-            arrived = true;
+            state = EnamyState.Wait;
+ 
             velocity = Vector3.zero;
         }
     }
 
     public EnamyState GetState()
     {
-        return State;
+        return state;
     }
 }
 
