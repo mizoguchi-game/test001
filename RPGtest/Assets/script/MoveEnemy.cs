@@ -2,109 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveEnemy : MonoBehaviour
-{
+public class MoveEnemy : MonoBehaviour {
+
     private CharacterController enemyController;
+    private Animator animator;
+
+    //目的地
     private Vector3 destination;
-    //歩行速度
-    private float walkspeed = 1.0f;
+    //歩くスピード    
+    private float walkSpeed = 1.0f;
+    //速度
     private Vector3 velocity;
+    //移動方向
     private Vector3 direction;
-    private SetPosition setPosition;
-    //ウェイトタイムの指定
-    private float waitTime = 5f;
-    //経過時間
-    private float elapsedtime;
+    //到着フラグ
+    private bool arrived;
+    //開始位置
+    private Vector3 startPoint;
 
-    //Enemyの状態を列挙
-    public enum EnamyState
-    {
-        Walk,
-        Wait,
-        Chase
-    };
-
-    //Enemyの状態
-    private EnamyState state;
-    //
-    private Transform PlayerTransform;
-
-
-    void Start()
-    {
+	// Use this for initialization
+	void Start () {
         enemyController = GetComponent<CharacterController>();
-        setPosition = GetComponent<SetPosition>();
-        //移動先を取得
-        setPosition.CreateRandomPosition();
-        //移動速度を0クリア
+        animator = GetComponent<Animator>();
+        var randDestination = Random.insideUnitSphere * 8;
+        startPoint = transform.position;
+        destination = startPoint + new Vector3(randDestination.x, 0f, randDestination.y);
         velocity = Vector3.zero;
-        //経過時間をリセット
-        elapsedtime = 0f;
-        SetState("wait");
-    }
-
-    void Update()
-    {
-        if (state == EnamyState.Walk || state == EnamyState.Chase)
+        arrived = false;
+        
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        if (enemyController.isGrounded)
         {
-            if (state == EnamyState.Chase)
-            {
-                setPosition.SetDestination(PlayerTransform.position);
-            }
-
-            if (enemyController.isGrounded)
-            {
-                velocity = Vector3.zero;
-                direction = (destination - transform.position).normalized;
-                transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
-                velocity = direction * walkspeed;
-            }
-            //目的地に到着したかどうかの判定
-            if (Vector3.Distance(transform.position, setPosition.GetDestination()) < 0.5f)
-            {
-                SetState("wait");
-            } 
+            velocity = Vector3.zero;
+            animator.SetFloat("speed",2.0f);
+            direction = (destination - transform.position).normalized;
+            transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
+            velocity = direction * walkSpeed;
+            Debug.Log(destination);
         }
-        else if(state == EnamyState.Wait)
-        {
-            elapsedtime += Time.deltaTime;
-
-            if (elapsedtime > waitTime)
-            {
-                SetState("walk");
-            }
-        }
-
         velocity.y += Physics.gravity.y * Time.deltaTime;
         enemyController.Move(velocity * Time.deltaTime);
-    }
 
-    public void SetState(string mode,Transform obj = null)
-    {
-        if(mode == "walk")
+        if(Vector3.Distance(transform.position,destination)< 0.5f)
         {
-
-            elapsedtime = 0f;
-            state = EnamyState.Walk;
-            setPosition.CreateRandomPosition();
+            arrived = true;
+            animator.SetFloat("speed", 0.0f);
         }
-        else if(mode == "Chase")
-        {
-            state = EnamyState.Chase;
- 
-            PlayerTransform = obj;
-        }else if (mode == "wait")
-        {
-            elapsedtime = 0f;
-            state = EnamyState.Wait;
- 
-            velocity = Vector3.zero;
-        }
-    }
-
-    public EnamyState GetState()
-    {
-        return state;
-    }
+	}
 }
-
