@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,77 +201,41 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalPosition.x
       value: 12.83
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalPosition.y
       value: -1.6349758e-16
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalPosition.z
       value: 10.64
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+    - target: {fileID: 4282169274778198, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 70f99cbac71ab67459806ef3fa4727ae, type: 2}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
+  m_ParentPrefab: {fileID: 100100000, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &749545929 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100028, guid: 198ffd4e27fc3214abc9bf6952adb29a, type: 3}
-  m_PrefabInternal: {fileID: 749545928}
---- !u!143 &749545930
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 749545929}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 1.1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &749545931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 749545929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829c826d76669314f9e39781c2934afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1633458527
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemys:
-  - {fileID: 0}
+  - {fileID: 1979237669251278, guid: 340e665210ccef9418151d0e4563d4bf, type: 2}
   appearNextTime: 5
   maxNumOfEnemys: 5
 --- !u!4 &1824895953

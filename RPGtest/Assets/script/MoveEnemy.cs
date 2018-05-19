@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MoveEnemy : MonoBehaviour {
 
+    private SetPositon setPositon;
     private CharacterController enemyController;
     private Animator animator;
 
@@ -19,37 +20,57 @@ public class MoveEnemy : MonoBehaviour {
     private bool arrived;
     //開始位置
     private Vector3 startPoint;
+    //待ち時間
+    private float waitTime = 5f;
+    //経過時間
+    private float elapsedTime;
 
 	// Use this for initialization
 	void Start () {
+        setPositon = GetComponent<SetPositon>();
+        setPositon.CreateRandomPosition();
         enemyController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        var randDestination = Random.insideUnitSphere * 8;
         startPoint = transform.position;
-        destination = startPoint + new Vector3(randDestination.x, 0f, randDestination.y);
+        destination = setPositon.GetDestination();
         velocity = Vector3.zero;
         arrived = false;
-        
+        elapsedTime = 0f;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (enemyController.isGrounded)
-        {
-            velocity = Vector3.zero;
-            animator.SetFloat("speed",2.0f);
-            direction = (destination - transform.position).normalized;
-            transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
-            velocity = direction * walkSpeed;
-            Debug.Log(destination);
-        }
-        velocity.y += Physics.gravity.y * Time.deltaTime;
-        enemyController.Move(velocity * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position,destination)< 0.5f)
-        {
-            arrived = true;
-            animator.SetFloat("speed", 0.0f);
+    // Update is called once per frame
+    void Update() {
+        if (!arrived) {
+            if (enemyController.isGrounded)
+            {
+                velocity = Vector3.zero;
+                animator.SetFloat("speed", 2.0f);
+                direction = (destination - transform.position).normalized;
+                transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
+                velocity = direction * walkSpeed;
+            }
+            velocity.y += Physics.gravity.y * Time.deltaTime;
+            enemyController.Move(velocity * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, destination) < 0.5f)
+            {
+                arrived = true;
+                animator.SetFloat("speed", 0.0f);
+            }
         }
-	}
+        else
+        {
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime > waitTime)
+            {
+                setPositon.CreateRandomPosition();
+                destination = setPositon.GetDestination();
+                arrived = false;
+                elapsedTime = 0f;
+            }
+            Debug.Log(elapsedTime);
+          
+        }
+    }
 }
