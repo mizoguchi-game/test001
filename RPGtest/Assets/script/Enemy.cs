@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour {
     };
 
     [SerializeField]
-    private float freezeTime = 0.3f;
+    private float freezeTime = 50f;
 
 
 	// Use this for initialization
@@ -82,9 +82,10 @@ public class Enemy : MonoBehaviour {
                     SetState("wait");
                     animator.SetFloat("speed", 0.0f);
                 }
-            }else if (state == EnemyState.Chase)
+            }
+            else if (state == EnemyState.Chase)
             {
-                if (Vector3.Distance(transform.position, setPositon.GetDestination()) < 1f)
+                if (Vector3.Distance(transform.position, setPositon.GetDestination()) < 1.5f)
                 {
                     SetState("attack");
                 }
@@ -106,6 +107,7 @@ public class Enemy : MonoBehaviour {
             if (elapsedTime > freezeTime)
             {
                 SetState("walk");
+                Debug.Log("InfreezeTime");
             }
         }
         velocity.y += Physics.gravity.y * Time.deltaTime;
@@ -138,13 +140,16 @@ public class Enemy : MonoBehaviour {
             velocity = Vector3.zero;
             animator.SetFloat("speed", 0f);
             animator.SetBool("Attack", true);
-        }else if (mode == "freeze")
+            Debug.Log("InAttack");
+        }
+        else if (mode == "freeze")
         {
             elapsedTime = 0f;
             velocity = Vector3.zero;
             state = EnemyState.Freeze;
             animator.SetFloat("speed", 0f);
             animator.SetBool("Attack", false);
+            Debug.Log("Infreeze");
         }
     }
 

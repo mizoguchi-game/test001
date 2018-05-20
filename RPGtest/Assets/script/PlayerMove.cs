@@ -17,7 +17,15 @@ public class PlayerMove : MonoBehaviour {
 
     bool ground;
 
-	// Use this for initialization
+	public enum MyState
+    {
+        Normal,
+        Damage
+    }
+
+    private MyState state;
+    
+    // Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -25,45 +33,60 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-        if (ground)
-        { 
-
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
-            if((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && v > 0.1)
+        if (state == MyState.Normal) {
+            if (ground)
             {
-                speed = v * Run;
+
+                float h = Input.GetAxis("Horizontal");
+                float v = Input.GetAxis("Vertical");
+
+                if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && v > 0.1)
+                {
+                    speed = v * Run;
+                }
+                else
+                {
+                    speed = v * Walk;
+                }
+
+                transform.Rotate(0f, h * rotateSpeed, 0f);
+                animator.SetFloat("Walking", Mathf.Abs(speed));
+
+                velocity = new Vector3(0, 0, speed);
+                velocity = transform.TransformDirection(velocity);
+                rb.velocity = velocity;
+
+                rb.angularVelocity = new Vector3(0f, 0f, 0f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.SetBool("Junping", true);
+                rb.AddForce(new Vector3(0, thrust, 0));
+                ground = false;
             }
             else
             {
-                speed = v * Walk;
+                animator.SetBool("Junping", false);
             }
-
-            transform.Rotate(0f, h * rotateSpeed, 0f);
-            animator.SetFloat("Walking", Mathf.Abs(speed));
-
-            velocity = new Vector3(0, 0, speed);
-            velocity = transform.TransformDirection(velocity);
-            rb.velocity = velocity;
-
-            rb.angularVelocity = new Vector3(0f, 0f, 0f);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetBool("Junping",true);
-            rb.AddForce(new Vector3(0,thrust,0));
-            ground = false;
-        }
-        else
-        {
-            animator.SetBool("Junping", false);
         }
 	}
 
     private void OnCollisionStay(Collision col)
     {
         ground = true;
+    }
+
+    public void TakeDamage(Transform enemyTransform)
+    {
+        state = MyState.Damage;
+        velocity = Vector3.zero;
+        animator.SetTrigger("Damage");
+    }
+
+    public void EndDamage()
+    {
+        state = MyState.Normal;
+        Debug.Log("EndDmage");
     }
 }

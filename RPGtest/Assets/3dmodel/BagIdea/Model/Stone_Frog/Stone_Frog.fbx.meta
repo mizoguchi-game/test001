@@ -240,7 +240,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
+      - time: 0.99505764
         functionName: StateEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
