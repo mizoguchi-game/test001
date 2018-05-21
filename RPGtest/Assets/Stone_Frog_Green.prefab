@@ -144,8 +144,8 @@ GameObject:
   - component: {fileID: 143541980496456762}
   - component: {fileID: 95177723168701578}
   - component: {fileID: 114261031595095372}
-  - component: {fileID: 114428638775737454}
   - component: {fileID: 114266167361171680}
+  - component: {fileID: 114613215053531002}
   m_Layer: 0
   m_Name: Stone_Frog_Green
   m_TagString: Untagged
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfcbd76c3119cb47a09e74821d76ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114428638775737454
+--- !u!114 &114613215053531002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca69bd136e1a0249a7da83c31fd5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 0.3
+  freezeTime: 3
 --- !u!137 &137001053562005962
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour {
     };
 
     [SerializeField]
-    private float freezeTime = 50f;
+    private float freezeTime = 3f;
 
 
 	// Use this for initialization
@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour {
             {
                 SetState("walk");
                 Debug.Log("InfreezeTime");
+                Debug.Log("freezeTime:"+freezeTime);
             }
         }
         velocity.y += Physics.gravity.y * Time.deltaTime;
