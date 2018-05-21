@@ -20,7 +20,8 @@ public class PlayerMove : MonoBehaviour {
 	public enum MyState
     {
         Normal,
-        Damage
+        Damage,
+        Attack
     }
 
     private MyState state;
@@ -69,8 +70,27 @@ public class PlayerMove : MonoBehaviour {
             {
                 animator.SetBool("Junping", false);
             }
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SetState(MyState.Attack);
+            }
         }
 	}
+
+    public void SetState(MyState myState)
+    {
+        if(myState == MyState.Normal)
+        {
+            animator.SetBool("Attack", false);
+            state = MyState.Normal;
+        }else if(myState == MyState.Attack)
+        {
+            velocity = Vector3.zero;
+            state = MyState.Attack;
+            animator.SetTrigger("Attack");
+        }
+    }
 
     private void OnCollisionStay(Collision col)
     {
@@ -82,11 +102,5 @@ public class PlayerMove : MonoBehaviour {
         state = MyState.Damage;
         velocity = Vector3.zero;
         animator.SetTrigger("Damage");
-    }
-
-    public void EndDamage()
-    {
-        state = MyState.Normal;
-        Debug.Log("EndDmage");
     }
 }

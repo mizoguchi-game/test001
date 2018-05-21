@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class ProceesMyAttak : MonoBehaviour {
 
-
+    private PlayerMove playerMove;
+    private BoxCollider boxCollider;
+    private Animator animator;
 
 	// Use this for initialization
 	void Start () {
-		
+        playerMove = GetComponent<PlayerMove>();
+        boxCollider = GetComponentInChildren<BoxCollider>();
+        animator = GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	void AttackStart()
+    {
+        boxCollider.enabled = true;
+    }
+
+    void AttackEnd()
+    {
+        boxCollider.enabled = false;
+    }
+
+    void StateEnd()
+    {
+        playerMove.SetState(PlayerMove.MyState.Normal);
+        Debug.Log("StateEnd");
+    }
+
+    public void EndDamage()
+    {
+        playerMove.SetState(PlayerMove.MyState.Normal);
+        Debug.Log("EndDmage");
+    }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -278,6 +278,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 606604723b4e7df419b25f96bc05a124, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &598344932 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1664038631714706, guid: 606604723b4e7df419b25f96bc05a124,
+    type: 2}
+  m_PrefabInternal: {fileID: 598344931}
+--- !u!114 &598344933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598344932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e22caefdd58dd488d862f3682cc23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &914902633 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1405779715121068, guid: 81c5e94c6e96a4148aeccf9a57fce393,
@@ -382,6 +398,10 @@ Prefab:
         type: 2}
       propertyPath: freezeTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1496824725641382, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
+      propertyPath: m_TagString
+      value: Enamy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65390578043374320, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
@@ -610,6 +630,17 @@ Transform:
   m_PrefabParentObject: {fileID: 4623740812745284, guid: b0768a4ef7556e24697ad2db0cc36243,
     type: 2}
   m_PrefabInternal: {fileID: 1729063337}
+--- !u!114 &1729063342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729063338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7f5a5c4b050544eb3da3f1c77f7bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1729063344
 CapsuleCollider:
   m_ObjectHideFlags: 0
