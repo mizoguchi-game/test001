@@ -13,7 +13,7 @@ public class searchCharacter : MonoBehaviour {
             //Enemy キャラが追いかけている状態でなければ追いかける設定に変更
             if (state != Enemy.EnemyState.Chase && state != Enemy.EnemyState.Freeze)
             {
-                Debug.Log("プレイヤー発見");
+                //Debug.Log("プレイヤー発見");
                 GetComponentInParent<Enemy>().SetState("chase", other.transform);
 
             }
@@ -24,7 +24,7 @@ public class searchCharacter : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            Debug.Log("見失う");
+            //Debug.Log("見失う");
             GetComponentInParent<Enemy>().SetState("wait");
         }
     }

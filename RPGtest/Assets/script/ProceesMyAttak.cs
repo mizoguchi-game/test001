@@ -18,11 +18,13 @@ public class ProceesMyAttak : MonoBehaviour {
 	void AttackStart()
     {
         boxCollider.enabled = true;
+        Debug.Log("AttackStart");
     }
 
     void AttackEnd()
     {
         boxCollider.enabled = false;
+        Debug.Log("AttackEnd");
     }
 
     void StateEnd()

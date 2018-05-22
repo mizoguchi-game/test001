@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour {
         Wait,
         Chase,
         Attack,
-        Freeze
+        Freeze,
+        Damage
     };
 
     [SerializeField]
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Debug.Log(state);
+        //Debug.Log(state);
         //見回りまたはキャラクターを追いかける状態
         if (state == EnemyState.Walk || state == EnemyState.Chase)
         {
@@ -107,8 +108,8 @@ public class Enemy : MonoBehaviour {
             if (elapsedTime > freezeTime)
             {
                 SetState("walk");
-                Debug.Log("InfreezeTime");
-                Debug.Log("freezeTime:"+freezeTime);
+                //Debug.Log("InfreezeTime");
+                //Debug.Log("freezeTime:"+freezeTime);
             }
         }
         velocity.y += Physics.gravity.y * Time.deltaTime;
@@ -141,7 +142,7 @@ public class Enemy : MonoBehaviour {
             velocity = Vector3.zero;
             animator.SetFloat("speed", 0f);
             animator.SetBool("Attack", true);
-            Debug.Log("InAttack");
+            //Debug.Log("InAttack");
         }
         else if (mode == "freeze")
         {
@@ -150,7 +151,12 @@ public class Enemy : MonoBehaviour {
             state = EnemyState.Freeze;
             animator.SetFloat("speed", 0f);
             animator.SetBool("Attack", false);
-            Debug.Log("Infreeze");
+            //Debug.Log("Infreeze");
+        }else if(mode == "Damage")
+        {
+            state = EnemyState.Damage;
+            velocity = Vector3.zero;
+            animator.SetTrigger("Damage");
         }
     }
 

@@ -6,7 +6,8 @@ public class AttackWeapon : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        Debug.Log("呼ばれた");
+        if (other.tag == "Enemy")
         {
             Debug.Log("敵にあたった");
             other.GetComponent<Enemy>().SetState("Damage");
