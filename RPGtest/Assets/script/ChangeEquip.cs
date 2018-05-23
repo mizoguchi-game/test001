@@ -10,8 +10,14 @@ public class ChangeEquip : MonoBehaviour {
     private ProceesMyAttak proceesMyAttack;
     private PlayerMove playerMove;
 
+    [SerializeField]
+    private Transform equip;
+    private MyStatus myStatus;
+
     private void Start()
     {
+        myStatus = GetComponent<MyStatus>();
+
         playerMove = GetComponentInParent<PlayerMove>();
         proceesMyAttack = transform.root.GetComponent<ProceesMyAttak>();
 
@@ -60,9 +66,9 @@ public class ChangeEquip : MonoBehaviour {
         }
 
         //今装備している武器を削除
-        if (transform.childCount != 0)
+        if (equip.childCount != 0)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            Destroy(equip.GetChild(0).gameObject);
         }
 
         //新しく装備する武装をインスタンス化
@@ -71,17 +77,19 @@ public class ChangeEquip : MonoBehaviour {
 
         if (equipment == 0)
         {
-            weapon.transform.SetParent(transform);
+            weapon.transform.SetParent(equip);
             weapon.transform.localPosition = new Vector3(0f,0f,0f);
             weapon.transform.localEulerAngles = new Vector3(38.929f, -81.94601f, -84.91901f);
             weapon.transform.localScale = new Vector3(18.64241f, 30.14519f, 8.053901f);
         }
         else
         {
-            weapon.transform.SetParent(transform);
+            weapon.transform.SetParent(equip);
             weapon.transform.localPosition = new Vector3(0f, 0f, 0f);
             weapon.transform.localEulerAngles = new Vector3(44.816f, -88.95901f, -88.523f);
             weapon.transform.localScale = new Vector3(24.68945f, 24.68945f, 24.68945f);
         }
+
+        myStatus.SetEquip(weapon);
     }
 }
