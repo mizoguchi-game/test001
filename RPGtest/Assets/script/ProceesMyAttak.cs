@@ -5,25 +5,28 @@ using UnityEngine;
 public class ProceesMyAttak : MonoBehaviour {
 
     private PlayerMove playerMove;
-    private BoxCollider boxCollider;
+    private Collider weaponCollider;
     private Animator animator;
+
+    [SerializeField]
+    private Transform equip;
 
 	// Use this for initialization
 	void Start () {
         playerMove = GetComponent<PlayerMove>();
-        boxCollider = GetComponentInChildren<BoxCollider>();
+        weaponCollider = equip.GetComponentInChildren<Collider>();
         animator = GetComponent<Animator>();
 	}
 	
 	void AttackStart()
     {
-        boxCollider.enabled = true;
+        weaponCollider.enabled = true;
         Debug.Log("AttackStart");
     }
 
     void AttackEnd()
     {
-        boxCollider.enabled = false;
+        weaponCollider.enabled = false;
         Debug.Log("AttackEnd");
     }
 
@@ -37,5 +40,10 @@ public class ProceesMyAttak : MonoBehaviour {
     {
         playerMove.SetState(PlayerMove.MyState.Normal);
         Debug.Log("EndDmage");
+    }
+
+    public void SetCollider(Collider col)
+    {
+        weaponCollider = col;
     }
 }

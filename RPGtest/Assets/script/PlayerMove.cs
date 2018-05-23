@@ -92,6 +92,11 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
+    public MyState GetState()
+    {
+        return state;
+    }
+
     private void OnCollisionStay(Collision col)
     {
         ground = true;
