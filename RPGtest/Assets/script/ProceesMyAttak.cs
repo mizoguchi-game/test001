@@ -20,13 +20,18 @@ public class ProceesMyAttak : MonoBehaviour {
 	
 	void AttackStart()
     {
-        weaponCollider.enabled = true;
+        if (weaponCollider != null)
+        {
+            weaponCollider.enabled = true;
+        }
+        
         Debug.Log("AttackStart");
     }
 
     void AttackEnd()
     {
-        weaponCollider.enabled = false;
+        if (weaponCollider != null) { weaponCollider.enabled = false; }
+        
         Debug.Log("AttackEnd");
     }
 

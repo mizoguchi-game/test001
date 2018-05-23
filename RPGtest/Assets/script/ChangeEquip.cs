@@ -17,7 +17,6 @@ public class ChangeEquip : MonoBehaviour {
 
         //初期装備指定
         equipment = -1;
-        weapons[equipment].SetActive(true);
     }
 
     private void Update()
@@ -25,6 +24,7 @@ public class ChangeEquip : MonoBehaviour {
         if (Input.GetKeyDown("1") && playerMove.GetState() == PlayerMove.MyState.Normal)
         {
             InstantiateWepon();
+            Debug.Log("切り替え呼ばれた");
         }
     }
 
@@ -68,5 +68,20 @@ public class ChangeEquip : MonoBehaviour {
         //新しく装備する武装をインスタンス化
         var weapon = GameObject.Instantiate(weapons[equipment]) as GameObject;
         proceesMyAttack.SetCollider(weapon.GetComponent<Collider>());
+
+        if (equipment == 0)
+        {
+            weapon.transform.SetParent(transform);
+            weapon.transform.localPosition = new Vector3(0f,0f,0f);
+            weapon.transform.localEulerAngles = new Vector3(38.929f, -81.94601f, -84.91901f);
+            weapon.transform.localScale = new Vector3(18.64241f, 30.14519f, 8.053901f);
+        }
+        else
+        {
+            weapon.transform.SetParent(transform);
+            weapon.transform.localPosition = new Vector3(0f, 0f, 0f);
+            weapon.transform.localEulerAngles = new Vector3(44.816f, -88.95901f, -88.523f);
+            weapon.transform.localScale = new Vector3(24.68945f, 24.68945f, 24.68945f);
+        }
     }
 }
