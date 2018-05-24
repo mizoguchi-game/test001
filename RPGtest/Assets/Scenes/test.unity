@@ -3542,6 +3542,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 1664038631714706, guid: 606604723b4e7df419b25f96bc05a124, type: 2}
   - {fileID: 1519046392626124, guid: a6f17e86f9f90b3479f91cb837b7d6af, type: 2}
+  equip: {fileID: 432194910}
 --- !u!136 &1729063344
 CapsuleCollider:
   m_ObjectHideFlags: 0

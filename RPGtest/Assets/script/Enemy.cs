@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
     private SetPositon setPositon;
     private CharacterController enemyController;
     private Animator animator;
+    private EnemyStatus enemyStatus;
 
     //目的地
     private Vector3 destination;
@@ -37,7 +38,8 @@ public class Enemy : MonoBehaviour {
         Chase,
         Attack,
         Freeze,
-        Damage
+        Damage,
+        Dead
     };
 
     [SerializeField]
@@ -54,6 +56,7 @@ public class Enemy : MonoBehaviour {
         arrived = false;
         elapsedTime = 0f;
         SetState("wait");
+        enemyStatus = GetComponent<EnemyStatus>();
 	}
 
     // Update is called once per frame
@@ -116,6 +119,15 @@ public class Enemy : MonoBehaviour {
         enemyController.Move(velocity * Time.deltaTime);
     }
 
+    public void TakeDamage()
+    {
+        if(state != EnemyState.Dead)
+        {
+            SetState("Damage");
+            enemyStatus.SetHp(enemyStatus.GetHp() - 1);
+        }
+    }
+
     public void SetState(string mode,Transform obj = null)
     {
         if (mode == "walk")
@@ -157,11 +169,23 @@ public class Enemy : MonoBehaviour {
             state = EnemyState.Damage;
             velocity = Vector3.zero;
             animator.SetTrigger("Damage");
+        }else if(mode == "Dead")
+        {
+            state = EnemyState.Dead;
+            velocity = Vector3.zero;
         }
+    }
+    
+    public void Dead()
+    {
+        SetState("Dead");
+        animator.SetTrigger("Dead");
+        Destroy(this.gameObject, 3f);
     }
 
     public EnemyState GetState()
     {
         return state;
     }
+
 }
