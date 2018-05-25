@@ -582,6 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca69bd136e1a0249a7da83c31fd5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftHandCollider: {fileID: 0}
+  rightHandCollider: {fileID: 0}
   freezeTime: 3
 --- !u!137 &137001053562005962
 SkinnedMeshRenderer:
