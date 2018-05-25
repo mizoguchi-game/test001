@@ -1750,6 +1750,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1405779715121068, guid: 81c5e94c6e96a4148aeccf9a57fce393,
     type: 2}
   m_PrefabInternal: {fileID: 1445757698}
+--- !u!65 &914902635 stripped
+BoxCollider:
+  m_PrefabParentObject: {fileID: 65937295105715962, guid: 81c5e94c6e96a4148aeccf9a57fce393,
+    type: 2}
+  m_PrefabInternal: {fileID: 1445757698}
 --- !u!114 &914902636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2746,7 +2751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1496824725641382, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114261031595095372, guid: 81c5e94c6e96a4148aeccf9a57fce393,
         type: 2}
@@ -2758,6 +2763,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114613215053531002, guid: 81c5e94c6e96a4148aeccf9a57fce393,
+        type: 2}
+      propertyPath: leftHandCollider
+      value: 
+      objectReference: {fileID: 914902635}
+    - target: {fileID: 114613215053531002, guid: 81c5e94c6e96a4148aeccf9a57fce393,
+        type: 2}
+      propertyPath: rightHandCollider
+      value: 
+      objectReference: {fileID: 1826570653}
     m_RemovedComponents:
     - {fileID: 65390578043374320, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
     - {fileID: 114266167361171680, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
@@ -2768,13 +2783,26 @@ GameObject:
   m_PrefabParentObject: {fileID: 1496824725641382, guid: 81c5e94c6e96a4148aeccf9a57fce393,
     type: 2}
   m_PrefabInternal: {fileID: 1445757698}
+--- !u!114 &1445757700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1445757699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad3c10bc51b49346a35628876bfbfa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 20
+  attackPower: 1
 --- !u!114 &1445757705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1445757699}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bfcbd76c3119cb47a09e74821d76ec7, type: 3}
   m_Name: 
@@ -3460,6 +3488,7 @@ GameObject:
   - component: {fileID: 1729063343}
   - component: {fileID: 1729063340}
   - component: {fileID: 1729063342}
+  - component: {fileID: 1729063346}
   m_Layer: 0
   m_Name: UTC_Default
   m_TagString: Player
@@ -3575,6 +3604,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1729063346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729063338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4090f3d1debe508408b1623eb8775843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  power: 1
 --- !u!1 &1745364742
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,6 +3913,11 @@ Transform:
 --- !u!1 &1826570651 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1403638443287296, guid: 81c5e94c6e96a4148aeccf9a57fce393,
+    type: 2}
+  m_PrefabInternal: {fileID: 1445757698}
+--- !u!65 &1826570653 stripped
+BoxCollider:
+  m_PrefabParentObject: {fileID: 65244555795521380, guid: 81c5e94c6e96a4148aeccf9a57fce393,
     type: 2}
   m_PrefabInternal: {fileID: 1445757698}
 --- !u!114 &1826570654

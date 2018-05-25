@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 23216193998982452}
   - component: {fileID: 65837699433835044}
   - component: {fileID: 114753647427556940}
+  - component: {fileID: 114200131703127074}
   m_Layer: 0
   m_Name: staff
   m_TagString: Untagged
@@ -126,6 +127,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.005727956, y: 0.037617195, z: 0.006951857}
   m_Center: {x: -0.00055771566, y: 0.0011682177, z: -0.0002749535}
+--- !u!114 &114200131703127074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519046392626124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e69930134a85ddb43bc582da71e3aaaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPower: 5
+  ShotPower: 0
+  weaponType: Staff
+  weaponRange: 0
 --- !u!114 &114753647427556940
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -41,7 +41,7 @@ public class ProceesMyAttak : MonoBehaviour {
         Debug.Log("StateEnd");
     }
 
-    public void EndDamage()
+    void EndDamage()
     {
         playerMove.SetState(PlayerMove.MyState.Normal);
         Debug.Log("EndDmage");

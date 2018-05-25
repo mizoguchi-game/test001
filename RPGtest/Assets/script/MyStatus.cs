@@ -3,9 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MyStatus : MonoBehaviour {
-
+    
+    [SerializeField]
     private int hp;
+
+    [SerializeField]
+    private int power;
+    private WeapomStatus weapomStatus;
+
     private GameObject equip;
+
+    public void SetEquip(GameObject weapon)
+    {
+        equip = weapon;
+        weapomStatus = equip.GetComponent<WeapomStatus>();
+    }
+
+    public int GetAttackPower()
+    {
+        return power + weapomStatus.GetAttackPower();
+    }
 
     void SetHp (int hp)
     {
@@ -15,11 +32,6 @@ public class MyStatus : MonoBehaviour {
     public int GetHp()
     {
         return hp;
-    }
-
-    public void SetEquip(GameObject weapon)
-    {
-        equip = weapon;
     }
 
     public GameObject GetEquip()

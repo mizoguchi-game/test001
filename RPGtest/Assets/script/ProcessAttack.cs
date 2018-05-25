@@ -18,18 +18,18 @@ public class ProcessAttack : MonoBehaviour {
     void AttackStart()
     {
         boxCollider.enabled = true;
-        Debug.Log("AttackStart");
+        //Debug.Log("AttackStart");
     }
 
     void AttackEnd()
     {
         boxCollider.enabled = false;
-        Debug.Log("AttackEnd");
+        //Debug.Log("AttackEnd");
     }
 
     void StateEnd()
     {
         enemy.SetState("freeze");
-        Debug.Log("StateEnd");
+        //Debug.Log("StateEnd");
     }
 }

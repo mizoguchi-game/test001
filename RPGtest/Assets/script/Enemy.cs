@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour {
     private CharacterController enemyController;
     private Animator animator;
     private EnemyStatus enemyStatus;
+    [SerializeField]
+    private BoxCollider leftHandCollider;
+    [SerializeField]
+    private BoxCollider rightHandCollider;
 
     //目的地
     private Vector3 destination;
@@ -119,12 +123,14 @@ public class Enemy : MonoBehaviour {
         enemyController.Move(velocity * Time.deltaTime);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         if(state != EnemyState.Dead)
         {
+            leftHandCollider.enabled = false;
+            rightHandCollider.enabled = false;
             SetState("Damage");
-            enemyStatus.SetHp(enemyStatus.GetHp() - 1);
+            enemyStatus.SetHp(enemyStatus.GetHp() - damage);
         }
     }
 
