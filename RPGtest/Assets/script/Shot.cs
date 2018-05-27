@@ -1,0 +1,98 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Shot : MonoBehaviour {
+
+    //レイの長さ
+    private float rayRange;
+    [SerializeField]
+    private Transform equip;
+
+    //レーザーポインター
+    private LineRenderer raserPointer;
+    //発砲の光
+    private Light shotLigth;
+    //発砲の光の持続時間
+    [SerializeField]
+    private float ligthLimit;
+    //発砲の光が出てからの経過時間
+    private float ligthElapsedTime;
+    //主人公の行動処理script
+    private PlayerMove move;
+    //敵にレーザーポインタが当たった時のポイント
+    [SerializeField]
+    public MeshRenderer shotPoint;
+    //主人公のステータススクリプト
+    private MyStatus myStatus;
+    //レーザーポインタが何かに当たっているかどうか
+    private bool hitFlag = false;
+    //レイを飛ばした先で一番近い位置
+    private Vector3 nearPoint;
+    //レイがヒットした一番近い位置と銃口の距離
+    private float distance = float.MaxValue;
+    //銃の発射工
+    [SerializeField]
+    private Transform muzzle;
+
+	// Use this for initialization
+	void Start () {
+        myStatus = GetComponent<MyStatus>();
+        move = GetComponent<PlayerMove>();
+        rayRange = 1000f;
+	}
+	
+    public void SetAbleRaserPointer()
+    {
+        raserPointer.enabled = true;
+    }
+
+    public void SetDisableRaserPointer()
+    {
+        raserPointer.enabled = false;
+    }
+
+    public void SetAbleLight()
+    {
+        shotLigth.enabled = true;
+        ligthElapsedTime = 0f;
+    }
+
+    public void SetDisableLight()
+    {
+        shotLigth.enabled = false;
+    }
+
+    public void SetComponent()
+    {
+        raserPointer = equip.GetComponentInChildren<LineRenderer>();
+        shotLigth = equip.GetComponentInChildren<Light>();
+        muzzle = equip.GetChild(0).Find("Muzzle");
+    }
+
+    private void Update()
+    {
+        if (move.GetState() == PlayerMove.MyState.WaitShot)
+        {
+            ligthElapsedTime += Time.deltaTime;
+
+            raserPointer.SetPosition(0, muzzle.position);
+
+            Ray ray = new Ray(muzzle.position, muzzle.forward);
+
+            RaycastHit hit;
+            hitFlag = false;
+            distance = float.MaxValue;
+
+            //Fieldレイヤーとの接触
+            if (Physics.Raycast(ray,out hit,rayRange,LayerMask.GetMask("Filed")))
+            {
+                shotPoint.enabled = false;
+                hitFlag = true;
+                nearPoint = hit.point;
+                distance = Vector3.Distance(muzzle.position, hit.point);
+            }
+
+        }
+    }
+}

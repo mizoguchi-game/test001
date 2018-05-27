@@ -17,19 +17,28 @@ public class PlayerMove : MonoBehaviour {
 
     bool ground;
 
+    private Shot shot;
+
+    //キャラクターのHPなどのステータスを格納
+    private MyStatus myStatus;
+
 	public enum MyState
     {
         Normal,
         Damage,
-        Attack
+        Attack,
+        WaitShot
     }
 
+    //現在のキャラクター状態を格納
     private MyState state;
     
     // Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        shot = GetComponent<Shot>();
+        myStatus = transform.GetComponent<MyStatus>();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +51,7 @@ public class PlayerMove : MonoBehaviour {
                 float h = Input.GetAxis("Horizontal");
                 float v = Input.GetAxis("Vertical");
 
+                //walk or Run　切り替え
                 if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && v > 0.1)
                 {
                     speed = v * Run;
@@ -60,7 +70,7 @@ public class PlayerMove : MonoBehaviour {
 
                 rb.angularVelocity = new Vector3(0f, 0f, 0f);
             }
-
+            //ジャンプ処理
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 animator.SetBool("Junping", true);
@@ -76,6 +86,32 @@ public class PlayerMove : MonoBehaviour {
             {
                 SetState(MyState.Attack);
             }
+            else if (Input.GetButton("Fire2") && myStatus.GetWeapomStatus() != null && myStatus.GetWeapomStatus().GetWeaponType() == "Gun")
+            {
+                SetState(MyState.WaitShot);
+                animator.SetBool("WaitShot", true);
+            }
+        }
+        else if(state == MyState.WaitShot)
+        {
+            //マウスの右ボタンを離したらnormal状態へ遷移
+            if (!Input.GetButton("Fire2"))
+            {
+                animator.SetBool("WaitShot", false); ;
+                shot.SetDisableLight();
+                shot.SetDisableRaserPointer();
+                SetState(MyState.Normal);
+            }
+            //構えた状態
+            else
+            {
+                shot.SetAbleRaserPointer();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    shot.SetAbleLight();
+                    shot.JudgeShot();
+                }
+            }
         }
 	}
 
@@ -89,7 +125,10 @@ public class PlayerMove : MonoBehaviour {
         {
             velocity = Vector3.zero;
             state = MyState.Attack;
-            animator.SetTrigger("Attack");
+            animator.SetBool("Attack",true);
+        }else if (myState == MyState.WaitShot)
+        {
+            state = MyState.WaitShot;
         }
     }
 

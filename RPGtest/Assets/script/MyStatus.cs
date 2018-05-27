@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MyStatus : MonoBehaviour {
-    
+
     [SerializeField]
     private int hp;
 
@@ -17,6 +17,11 @@ public class MyStatus : MonoBehaviour {
     {
         equip = weapon;
         weapomStatus = equip.GetComponent<WeapomStatus>();
+    }
+
+    public WeapomStatus GetWeapomStatus()
+    {
+        return weapomStatus;
     }
 
     public int GetAttackPower()

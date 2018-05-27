@@ -82,12 +82,19 @@ public class ChangeEquip : MonoBehaviour {
             weapon.transform.localEulerAngles = new Vector3(38.929f, -81.94601f, -84.91901f);
             weapon.transform.localScale = new Vector3(18.64241f, 30.14519f, 8.053901f);
         }
-        else
+        else if (equipment == 1)
         {
             weapon.transform.SetParent(equip);
             weapon.transform.localPosition = new Vector3(0f, 0f, 0f);
             weapon.transform.localEulerAngles = new Vector3(44.816f, -88.95901f, -88.523f);
             weapon.transform.localScale = new Vector3(24.68945f, 24.68945f, 24.68945f);
+        }
+        else if (equipment == 2)
+        {
+            weapon.transform.SetParent(equip);
+            weapon.transform.localPosition = new Vector3(0f, 0f, 0f);
+            weapon.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            weapon.transform.localScale = new Vector3(0.2847402f, 0.2847401f, 0.2847401f);
         }
 
         myStatus.SetEquip(weapon);
