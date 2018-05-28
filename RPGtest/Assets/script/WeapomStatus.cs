@@ -28,7 +28,7 @@ public class WeapomStatus : MonoBehaviour {
         return weaponType;
     }
 
-    public float WeaponRange()
+    public float GetWeaponRange()
     {
         return weaponRange;
     }

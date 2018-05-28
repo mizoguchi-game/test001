@@ -15,7 +15,7 @@ public class Shot : MonoBehaviour {
     private Light shotLigth;
     //発砲の光の持続時間
     [SerializeField]
-    private float ligthLimit;
+    private float lightLimit;
     //発砲の光が出てからの経過時間
     private float ligthElapsedTime;
     //主人公の行動処理script
@@ -92,7 +92,53 @@ public class Shot : MonoBehaviour {
                 nearPoint = hit.point;
                 distance = Vector3.Distance(muzzle.position, hit.point);
             }
+            //Enemyレイヤーとの接触
+            if (Physics.Raycast(ray,out hit,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Enemy")))
+            {
+                if (hit.collider.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
+                {
+                    shotPoint.enabled = true;
+                    hitFlag = true;
 
+                    //Fieldレイヤーとの接触よりEnemyレイヤーとの接触が近い場合
+                    if (Vector3.Distance(muzzle.position,hit.point) < distance)
+                    {
+                        nearPoint = hit.point;
+                        shotPoint.transform.position = hit.point;
+                        //Fieldレイヤーのほうが近い場合shotpointを無効か
+                    }
+                    else
+                    {
+                        shotPoint.enabled = false;
+                    }
+                }
+            }
+            //何らかに接触していたら接触した一番近い位置をレザーポイントの
+            if (hitFlag)
+            {
+                raserPointer.SetPosition(1, nearPoint);
+                //接触していなければShotPointを無効化し、レーザーポインタはMUzzleからRayRangeの長さ分いったところを到達点にする
+            }
+            else
+            {
+                shotPoint.enabled = false;
+                raserPointer.SetPosition(1, ray.origin + ray.direction * rayRange);
+            }
+
+            if (ligthElapsedTime >= lightLimit)
+            {
+                SetDisableLight();
+            }
+            //銃を構えた状態でなければレーザーポインタ、銃の光、shotPointを無効化
+        }
+        else
+        {
+            if(raserPointer != null)
+            {
+                raserPointer.enabled = false;
+                shotLigth.enabled = false;
+            }
+            shotPoint.enabled = false;
         }
     }
 }
