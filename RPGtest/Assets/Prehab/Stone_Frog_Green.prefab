@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 114261031595095372}
   - component: {fileID: 114266167361171680}
   - component: {fileID: 114613215053531002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stone_Frog_Green
   m_TagString: Enemy
   m_Icon: {fileID: 0}

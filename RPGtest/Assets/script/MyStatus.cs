@@ -43,4 +43,9 @@ public class MyStatus : MonoBehaviour {
     {
         return equip;
     }
+
+    public int GetShotPower()
+    {
+        return GetWeapomStatus().GetShotPower();
+    }
 }

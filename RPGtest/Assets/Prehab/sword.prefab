@@ -161,6 +161,9 @@ MonoBehaviour:
   ShotPower: 0
   weaponType: Sword
   weaponRange: 0
+  pos: {x: 0, y: 0, z: 0}
+  rot: {x: 38.929, y: -81.94601, z: -84.91901}
+  scale: {x: 18.64241, y: 30.14519, z: 8.053901}
 --- !u!114 &114707734905495340
 MonoBehaviour:
   m_ObjectHideFlags: 1

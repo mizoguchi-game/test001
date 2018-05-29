@@ -75,7 +75,14 @@ public class ChangeEquip : MonoBehaviour {
         var weapon = GameObject.Instantiate(weapons[equipment]) as GameObject;
         proceesMyAttack.SetCollider(weapon.GetComponent<Collider>());
 
-        if (equipment == 0)
+        var weaponStateus = weapon.GetComponent<WeapomStatus>();
+
+        weapon.transform.SetParent(equip);
+        weapon.transform.localPosition = weaponStateus.GetPos();
+        weapon.transform.localEulerAngles = weaponStateus.GetRot();
+        weapon.transform.localScale = weaponStateus.GetScale();
+
+        /*if (equipment == 0)
         {
             weapon.transform.SetParent(equip);
             weapon.transform.localPosition = new Vector3(0f,0f,0f);
@@ -95,8 +102,9 @@ public class ChangeEquip : MonoBehaviour {
             weapon.transform.localPosition = new Vector3(0f, 0f, 0f);
             weapon.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
             weapon.transform.localScale = new Vector3(0.2847402f, 0.2847401f, 0.2847401f);
-        }
+    }*/
 
         myStatus.SetEquip(weapon);
+        GetComponent<Shot>().SetComponent();
     }
 }

@@ -67,7 +67,11 @@ public class Shot : MonoBehaviour {
     {
         raserPointer = equip.GetComponentInChildren<LineRenderer>();
         shotLigth = equip.GetComponentInChildren<Light>();
-        muzzle = equip.GetChild(0).Find("Muzzle");
+        muzzle = equip.GetChild(0).GetChild(0).Find("Muzzle");
+        
+        Debug.Log("equip:"+ equip);
+        Debug.Log("raserPointer:" + raserPointer);
+        Debug.Log("muzzle:"+muzzle);
     }
 
     private void Update()
@@ -141,4 +145,31 @@ public class Shot : MonoBehaviour {
             shotPoint.enabled = false;
         }
     }
+
+    public void JudgeShot()
+    {
+        Ray ray = new Ray(muzzle.position, muzzle.forward);
+        RaycastHit hitPoint;
+        distance = rayRange;
+
+        //フィールド
+        if (Physics.Raycast(ray, out hitPoint, myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Field")))
+        {
+            distance = Vector3.Distance(muzzle.position, hitPoint.point);
+        }
+        if(Physics.Raycast(ray,out hitPoint,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Enemy")))
+        {
+            if (distance > Vector3.Distance(muzzle.position,hitPoint.point))
+            {
+                var enemyObj = hitPoint.collider.gameObject.transform.root;
+
+                if (enemyObj.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
+                {
+                    var enemt = enemyObj.GetComponent<Enemy>();
+                    enemt.TakeDamage(myStatus.GetShotPower());
+                }
+            }
+        }
+    }
+
 }

@@ -65,6 +65,10 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (state == EnemyState.Dead)
+        {
+            return;
+        }
         //Debug.Log(state);
         //見回りまたはキャラクターを追いかける状態
         if (state == EnemyState.Walk || state == EnemyState.Chase)
@@ -136,6 +140,11 @@ public class Enemy : MonoBehaviour {
 
     public void SetState(string mode,Transform obj = null)
     {
+        //死んでいたいた場合状態変更を行わない。
+        if (state == EnemyState.Dead)
+        {
+            return;
+        }
         if (mode == "walk")
         {
             arrived = false;
@@ -185,6 +194,7 @@ public class Enemy : MonoBehaviour {
     public void Dead()
     {
         SetState("Dead");
+        animator.ResetTrigger("Damage");
         animator.SetTrigger("Dead");
         Destroy(this.gameObject, 3f);
     }

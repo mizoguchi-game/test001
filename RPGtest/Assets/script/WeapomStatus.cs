@@ -12,6 +12,12 @@ public class WeapomStatus : MonoBehaviour {
     private string weaponType;
     [SerializeField]
     private float weaponRange;
+    [SerializeField]
+    private Vector3 pos;
+    [SerializeField]
+    private Vector3 rot;
+    [SerializeField]
+    private Vector3 scale;
 
     public int GetAttackPower()
     {
@@ -31,5 +37,20 @@ public class WeapomStatus : MonoBehaviour {
     public float GetWeaponRange()
     {
         return weaponRange;
+    }
+
+    public Vector3 GetPos()
+    {
+        return pos;
+    }
+
+    public Vector3 GetRot()
+    {
+        return rot;
+    }
+
+    public Vector3 GetScale()
+    {
+        return scale;
     }
 }
