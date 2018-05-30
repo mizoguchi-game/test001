@@ -40,6 +40,7 @@ public class Shot : MonoBehaviour {
         myStatus = GetComponent<MyStatus>();
         move = GetComponent<PlayerMove>();
         rayRange = 1000f;
+        Debug.Log(equip.childCount);
 	}
 	
     public void SetAbleRaserPointer()
@@ -77,10 +78,15 @@ public class Shot : MonoBehaviour {
     {
         raserPointer = equip.GetComponentInChildren<LineRenderer>();
         shotLigth = equip.GetComponentInChildren<Light>();
-        muzzle = equip.GetChild(0);/*.Find("Muzzle");*/
+        muzzle = equip.GetChild(0).Find("Muzzle");
+        var tmp1 = equip.GetChild(0);
+        var tmp2 = equip.childCount;
         Debug.Log("equip:" + equip);
         Debug.Log("raserPointer:" + raserPointer);
         Debug.Log("muzzle:" + muzzle);
+        Debug.Log("tmp1親名:" + tmp1);
+        Debug.Log("tmp2子の数:" + tmp2);
+
     }
 
     private void Update()

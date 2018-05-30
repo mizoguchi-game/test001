@@ -58,6 +58,7 @@ public class ChangeEquip : MonoBehaviour {
 
     void InstantiateWepon()
     {
+        Debug.Log("押された際の子数：" + equip.childCount);
         equipment++;
         if (equipment >= weapons.Length)
         {
@@ -68,21 +69,24 @@ public class ChangeEquip : MonoBehaviour {
         if (equip.childCount != 0)
         {
             Destroy(equip.GetChild(0).gameObject);
+            Debug.Log("削除後子数：" + equip.childCount);
+            Debug.Log("削除後子名：" + equip.GetChild(0));
         }
 
-        //新しく装備する武装をインスタンス化
-        var weapon = GameObject.Instantiate(weapons[equipment]) as GameObject;
-        proceesMyAttack.SetCollider(weapon.GetComponent<Collider>());
+        if (weapons.Length-1 !=  equipment) { 
+            //新しく装備する武装をインスタンス化
+            var weapon = GameObject.Instantiate(weapons[equipment]) as GameObject;
+            proceesMyAttack.SetCollider(weapon.GetComponent<Collider>());
 
-        var weaponStateus = weapon.GetComponent<WeapomStatus>();
+            var weaponStateus = weapon.GetComponent<WeapomStatus>();
 
-        weapon.transform.SetParent(equip);
-        weapon.transform.localPosition = weaponStateus.GetPos();
-        weapon.transform.localEulerAngles = weaponStateus.GetRot();
-        weapon.transform.localScale = weaponStateus.GetScale();
+            weapon.transform.SetParent(equip);
+            weapon.transform.localPosition = weaponStateus.GetPos();
+            weapon.transform.localEulerAngles = weaponStateus.GetRot();
+            weapon.transform.localScale = weaponStateus.GetScale();
 
-        myStatus.SetEquip(weapon);
-        /*GetComponent<Shot>().SetComponent(weapon.transform.GetChild(0));*/
-        GetComponent<Shot>().SetComponent();
+            myStatus.SetEquip(weapon);
+            GetComponent<Shot>().SetComponent();
+        }
     }
 }
