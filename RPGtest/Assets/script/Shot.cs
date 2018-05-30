@@ -63,15 +63,24 @@ public class Shot : MonoBehaviour {
         shotLigth.enabled = false;
     }
 
+    public void SetComponent(Transform muzzleTransform)
+    {
+        raserPointer = equip.GetComponentInChildren<LineRenderer>();
+        shotLigth = equip.GetComponentInChildren<Light>();
+        muzzle = muzzleTransform.Find("Muzzle");
+        /*muzzle = equip.GetChild(0).Find("Muzzle");*/
+        Debug.Log("equip:"+ equip);
+        Debug.Log("raserPointer:" + raserPointer);
+        Debug.Log("muzzle:"+muzzle);
+    }
     public void SetComponent()
     {
         raserPointer = equip.GetComponentInChildren<LineRenderer>();
         shotLigth = equip.GetComponentInChildren<Light>();
-        muzzle = equip.GetChild(0).GetChild(0).Find("Muzzle");
-        
-        Debug.Log("equip:"+ equip);
+        muzzle = equip.GetChild(0);/*.Find("Muzzle");*/
+        Debug.Log("equip:" + equip);
         Debug.Log("raserPointer:" + raserPointer);
-        Debug.Log("muzzle:"+muzzle);
+        Debug.Log("muzzle:" + muzzle);
     }
 
     private void Update()

@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-        Debug.Log(state);
+
         if (state == MyState.Normal) {
             if (ground)
             {
