@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour {
     //IK用フィールド宣言
     //spineボーンのX軸の変更
     [SerializeField]
-    private float xAsis = 0f;
+    private float xAxis = 0f;
     //spineボーンのX軸の変更限度値
     [SerializeField]
     private float xAxisLimit = 60f;
@@ -44,13 +44,15 @@ public class PlayerMove : MonoBehaviour {
     //手ブレを使用するかどうか
     [SerializeField]
     private bool isHandBlur;
-
-
-
-
-
-
-
+    //手振れ度合い
+    [SerializeField]
+    private float handBlurDegree = 0.05f;
+    //構え終わった時に値をセットしたらOn
+    private bool waitShotFlag;
+    //銃を構えた時の右肩の角度
+    private Vector3 rightShoulderAngle = new Vector3(341.4749f, 59.78393f,182.4079f);
+    //銃を構えた時の左肩の角度
+    private Vector3 leftShoulderAngle = new Vector3(16.17319f, 302.896f, 1846721f);
 
     //キャラクターのHPなどのステータスを格納
     private MyStatus myStatus;
@@ -182,8 +184,76 @@ public class PlayerMove : MonoBehaviour {
         animator.SetTrigger("Damage");
     }
 
-    private void OnAnimatorIK(int layerIndex)
+    private void OnAnimatorIK()
     {
-        
+        if (waitShotFlag)
+        {
+            //最終的なZ軸の回転角度
+            float lastZ;
+            //最終的なX軸の回転角度
+            float lastX;
+
+            if(Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
+            {
+                if (Input.GetAxis("Horizontal") > 0f)
+                {
+                    xAxis -= armsrotateSpeed * Time.deltaTime;
+                }
+                if (Input.GetAxis("Horizontal") < 0f)
+                {
+                    xAxis += armsrotateSpeed * Time.deltaTime;
+                }
+                if (Input.GetAxis("Vertical") > 0f)
+                {
+                    zAxis += armsrotateSpeed * Time.deltaTime;
+                }
+                if (Input.GetAxis("Vertical") < 0f)
+                {
+                    zAxis -= armsrotateSpeed * Time.deltaTime;
+                }
+
+                //リミットを超えていたらリミットを設定する
+                if (zAxis > zAxisLimit)
+                {
+                    zAxis = zAxisLimit;
+                }
+                if (zAxis < -zAxisLimit)
+                {
+                    zAxis = -zAxisLimit;
+                }
+                if (xAxis > xAxisLimit)
+                {
+                    xAxis = xAxisLimit;
+                }
+                if (xAxis < -xAxisLimit)
+                {
+                    xAxis = -xAxisLimit;
+                }
+            }
+
+            lastZ = (zAxis + initZ) % 360;
+            lastX = (xAxis + initX) % 396;
+
+            animator.SetBoneLocalRotation(HumanBodyBones.Spine, Quaternion.Euler(lastX, animator.GetBoneTransform(HumanBodyBones.Spine).localEulerAngles.y, lastZ));
+
+            if (isHandBlur)
+            {
+                var randomValue = new Vector3(Random.Range(-handBlurDegree, handBlurDegree), Random.Range(-handBlurDegree, handBlurDegree), Random.Range(-handBlurDegree, handBlurDegree));
+                animator.SetBoneLocalRotation(HumanBodyBones.RightShoulder, Quaternion.Euler(rightShoulderAngle + randomValue));
+                animator.SetBoneLocalRotation(HumanBodyBones.LeftShoulder, Quaternion.Euler(leftShoulderAngle + randomValue));
+            }
+
+            if(!Input.GetButton("Fire2"))
+            {
+                xAxis = 0;
+                zAxis = 0;
+                waitShotFlag = false;
+            }
+        }
+    }
+
+    public void SetReadyShot()
+    {
+        waitShotFlag = true;
     }
 }

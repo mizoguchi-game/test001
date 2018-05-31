@@ -51,4 +51,10 @@ public class ProceesMyAttak : MonoBehaviour {
     {
         weaponCollider = col;
     }
+
+    public void ReadyShot()
+    {
+        playerMove.SetReadyShot();
+        Debug.Log("AIManimation終了");
+    }
 }
