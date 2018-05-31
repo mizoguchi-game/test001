@@ -84,7 +84,7 @@ public class Shot : MonoBehaviour {
         Debug.Log("equip:" + equip);
         Debug.Log("raserPointer:" + raserPointer);
         Debug.Log("muzzle:" + muzzle);
-        Debug.Log("tmp1親名:" + tmp1);
+        Debug.Log("tmp1子名:" + tmp1);
         Debug.Log("tmp2子の数:" + tmp2);
 
     }

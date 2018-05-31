@@ -19,6 +19,39 @@ public class PlayerMove : MonoBehaviour {
 
     private Shot shot;
 
+    //IK用フィールド宣言
+    //spineボーンのX軸の変更
+    [SerializeField]
+    private float xAsis = 0f;
+    //spineボーンのX軸の変更限度値
+    [SerializeField]
+    private float xAxisLimit = 60f;
+    //spineボーンのZ軸の変更値
+    [SerializeField]
+    private float zAxis = 0f;
+    //spineボーンのZ軸の変更限度値
+    [SerializeField]
+    private float zAxisLimit = 30f;
+    //銃を構えた時のSpineボーンのZ軸の角度
+    [SerializeField]
+    private float initZ = 1.193215f;
+    //銃を構えた時のSpineボーンのX軸の角度
+    [SerializeField]
+    private float initX = 359.2921f;
+    //回転する角度のスピード
+    [SerializeField]
+    private float armsrotateSpeed = 45f;
+    //手ブレを使用するかどうか
+    [SerializeField]
+    private bool isHandBlur;
+
+
+
+
+
+
+
+
     //キャラクターのHPなどのステータスを格納
     private MyStatus myStatus;
 
@@ -147,5 +180,10 @@ public class PlayerMove : MonoBehaviour {
         state = MyState.Damage;
         velocity = Vector3.zero;
         animator.SetTrigger("Damage");
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        
     }
 }
