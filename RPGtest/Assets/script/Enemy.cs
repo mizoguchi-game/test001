@@ -127,9 +127,22 @@ public class Enemy : MonoBehaviour {
         enemyController.Move(velocity * Time.deltaTime);
     }
 
-    public void TakeDamage(int damage)
+    //ダメージを受けた時に当たった位置だけを受け取りる
+    public void TakeDamage(int damage,Vector3 hitPoint)
     {
         if(state != EnemyState.Dead)
+        {
+            leftHandCollider.enabled = false;
+            rightHandCollider.enabled = false;
+            SetState("Damage");
+            enemyStatus.SetHp(enemyStatus.GetHp() - damage);
+        }
+    }
+
+    //ダメージを受けた時に受けた場所のtransfromを受けた位置を受け取る
+    public void TakeDamage(int damage,Transform tra,Vector3 hitPoint)
+    {
+        if (state != EnemyState.Dead)
         {
             leftHandCollider.enabled = false;
             rightHandCollider.enabled = false;

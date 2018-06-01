@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,6 +143,47 @@ Transform:
   m_Father: {fileID: 1818930416}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &67595396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 67595397}
+  - component: {fileID: 67595398}
+  m_Layer: 10
+  m_Name: Leg_b_L
+  m_TagString: EnamyHit
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67595397
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67595396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1445757701}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &67595398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67595396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8712528, y: 1.2560626, z: 0.32058057}
+  m_Center: {x: 0.050515924, y: -0.15208285, z: -0.08840741}
 --- !u!1 &95897099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,7 +2792,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1496824725641382, guid: 81c5e94c6e96a4148aeccf9a57fce393, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114261031595095372, guid: 81c5e94c6e96a4148aeccf9a57fce393,
         type: 2}
@@ -2796,6 +2837,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 20
   attackPower: 1
+--- !u!4 &1445757701 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4933715447383616, guid: 81c5e94c6e96a4148aeccf9a57fce393,
+    type: 2}
+  m_PrefabInternal: {fileID: 1445757698}
 --- !u!114 &1445757705
 MonoBehaviour:
   m_ObjectHideFlags: 0

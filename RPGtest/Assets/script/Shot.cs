@@ -181,7 +181,7 @@ public class Shot : MonoBehaviour {
                 if (enemyObj.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
                 {
                     var enemt = enemyObj.GetComponent<Enemy>();
-                    enemt.TakeDamage(myStatus.GetShotPower());
+                    enemt.TakeDamage(myStatus.GetShotPower(),hitPoint.collider.transform,hitPoint.point);
                 }
             }
         }
