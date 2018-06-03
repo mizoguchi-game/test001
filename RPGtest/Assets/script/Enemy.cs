@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
@@ -12,6 +13,12 @@ public class Enemy : MonoBehaviour {
     private BoxCollider leftHandCollider;
     [SerializeField]
     private BoxCollider rightHandCollider;
+
+    //エージェント
+    private NavMeshAgent agent;
+    //回転スピード
+    [SerializeField]
+    private float rotateSpeed = 45f;
 
     //目的地
     private Vector3 destination;
@@ -52,6 +59,8 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        agent = GetComponent<NavMeshAgent>();
+
         setPositon = GetComponent<SetPositon>();
         setPositon.CreateRandomPosition();
         enemyController = GetComponent<CharacterController>();
@@ -64,7 +73,73 @@ public class Enemy : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    /*
+  void Update() {
+      if (state == EnemyState.Dead)
+      {
+          return;
+      }
+      //Debug.Log(state);
+      //見回りまたはキャラクターを追いかける状態
+      if (state == EnemyState.Walk || state == EnemyState.Chase)
+      {
+          //キャラクターを追いかける状態であればキャラクターの目的地を再設定
+          if(state == EnemyState.Chase)
+          {
+              setPositon.setDestination(playerTranform.position);
+          }
+          if (enemyController.isGrounded)
+          {
+              velocity = Vector3.zero;
+              animator.SetFloat("speed", 2.0f);
+              direction = (setPositon.GetDestination() - transform.position).normalized;
+              transform.LookAt(new Vector3(setPositon.GetDestination().x, transform.position.y, setPositon.GetDestination().z));
+              velocity = direction * walkSpeed;
+          }
+
+          if (state == EnemyState.Walk) { 
+              //目的地に到着したかどうかの判定
+              if (Vector3.Distance(transform.position,setPositon.GetDestination()) < 0.7f)
+              {
+                  SetState("wait");
+                  animator.SetFloat("speed", 0.0f);
+              }
+          }
+          else if (state == EnemyState.Chase)
+          {
+              if (Vector3.Distance(transform.position, setPositon.GetDestination()) < 1.5f)
+              {
+                  SetState("attack");
+              }
+          }
+          //目的地に到着していた場合一定時間待機
+      }else if (state == EnemyState.Wait)
+      {
+          elapsedTime += Time.deltaTime;
+
+          //待ち時間を超えたら次の目的を設定
+          if(elapsedTime > waitTime)
+          {
+              SetState("walk");
+          }
+      }else if (state == EnemyState.Freeze)
+      {
+          elapsedTime += Time.deltaTime;
+
+          if (elapsedTime > freezeTime)
+          {
+              SetState("walk");
+              //Debug.Log("InfreezeTime");
+              //Debug.Log("freezeTime:"+freezeTime);
+          }
+      }
+      velocity.y += Physics.gravity.y * Time.deltaTime;
+      enemyController.Move(velocity * Time.deltaTime);
+  }
+  */
+    //agent用アップデート
+    void Update()
+    {
         if (state == EnemyState.Dead)
         {
             return;
@@ -74,22 +149,19 @@ public class Enemy : MonoBehaviour {
         if (state == EnemyState.Walk || state == EnemyState.Chase)
         {
             //キャラクターを追いかける状態であればキャラクターの目的地を再設定
-            if(state == EnemyState.Chase)
+            if (state == EnemyState.Chase)
             {
                 setPositon.setDestination(playerTranform.position);
-            }
-            if (enemyController.isGrounded)
-            {
-                velocity = Vector3.zero;
-                animator.SetFloat("speed", 2.0f);
-                direction = (setPositon.GetDestination() - transform.position).normalized;
-                transform.LookAt(new Vector3(setPositon.GetDestination().x, transform.position.y, setPositon.GetDestination().z));
-                velocity = direction * walkSpeed;
+                agent.SetDestination(setPositon.GetDestination());
             }
 
-            if (state == EnemyState.Walk) { 
+            //エージェントの潜在的な速さを設定
+            animator.SetFloat("Speed",agent.desiredVelocity.magnitude);
+
+            if (state == EnemyState.Walk)
+            {
                 //目的地に到着したかどうかの判定
-                if (Vector3.Distance(transform.position,setPositon.GetDestination()) < 0.7f)
+                if (agent.remainingDistance < 0.7f)
                 {
                     SetState("wait");
                     animator.SetFloat("speed", 0.0f);
@@ -97,22 +169,26 @@ public class Enemy : MonoBehaviour {
             }
             else if (state == EnemyState.Chase)
             {
-                if (Vector3.Distance(transform.position, setPositon.GetDestination()) < 1.5f)
+                //攻撃する距離の場合攻撃
+                if (agent.remainingDistance < 2f)
                 {
                     SetState("attack");
                 }
             }
             //目的地に到着していた場合一定時間待機
-        }else if (state == EnemyState.Wait)
+        }
+        else if (state == EnemyState.Wait)
         {
             elapsedTime += Time.deltaTime;
 
             //待ち時間を超えたら次の目的を設定
-            if(elapsedTime > waitTime)
+            if (elapsedTime > waitTime)
             {
                 SetState("walk");
             }
-        }else if (state == EnemyState.Freeze)
+        }
+        //攻撃後のフリーズ状態
+        else if (state == EnemyState.Freeze)
         {
             elapsedTime += Time.deltaTime;
 
@@ -123,8 +199,15 @@ public class Enemy : MonoBehaviour {
                 //Debug.Log("freezeTime:"+freezeTime);
             }
         }
-        velocity.y += Physics.gravity.y * Time.deltaTime;
-        enemyController.Move(velocity * Time.deltaTime);
+        else if(state == EnemyState.Attack)
+        {
+            //プレイヤーの方向を取得
+            var playerDirection = new Vector3(playerTranform.position.x,transform.position.y,playerTranform.position.z) - transform.position;
+            //敵の向きをプレイヤーの方向に少しづつ変える
+            var dir = Vector3.RotateTowards(transform.forward, playerDirection, rotateSpeed * Time.deltaTime, 0f);
+            //算出した方向の角度を敵の角度に設定
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
     }
 
     //ダメージを受けた時に当たった位置だけを受け取りる
@@ -151,6 +234,8 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    //キャラクターコントローラー用
+    /*
     public void SetState(string mode,Transform obj = null)
     {
         //死んでいたいた場合状態変更を行わない。
@@ -191,7 +276,6 @@ public class Enemy : MonoBehaviour {
             state = EnemyState.Freeze;
             animator.SetFloat("speed", 0f);
             animator.SetBool("Attack", false);
-            //Debug.Log("Infreeze");
         }else if(mode == "Damage")
         {
             state = EnemyState.Damage;
@@ -203,7 +287,73 @@ public class Enemy : MonoBehaviour {
             velocity = Vector3.zero;
         }
     }
-    
+    */
+
+    //ナビメッシュ用
+    public void SetState(string mode, Transform obj = null)
+    {
+        //死んでいたいた場合状態変更を行わない。
+        if (state == EnemyState.Dead)
+        {
+            return;
+        }
+        if (mode == "walk")
+        {
+            arrived = false;
+            elapsedTime = 0f;
+            state = EnemyState.Walk;
+            setPositon.CreateRandomPosition();
+            agent.SetDestination(setPositon.GetDestination());
+            agent.isStopped = false;
+        }
+        else if (mode == "chase")
+        {
+            state = EnemyState.Chase;
+            arrived = false;
+            playerTranform = obj;
+            setPositon.setDestination(playerTranform.position);
+            agent.SetDestination(setPositon.GetDestination());
+            agent.isStopped = false;
+
+        }
+        else if (mode == "wait")
+        {
+            elapsedTime = 0f;
+            state = EnemyState.Wait;
+            arrived = true;
+            animator.SetFloat("speed", 0f);
+            agent.isStopped = true;
+        }
+        else if (mode == "attack")
+        {
+            state = EnemyState.Attack;
+            animator.SetFloat("speed", 0f);
+            agent.isStopped = true;
+            animator.SetBool("Attack", true);
+        }
+        else if (mode == "freeze")
+        {
+            elapsedTime = 0f;
+            state = EnemyState.Freeze;
+            animator.SetFloat("speed", 0f);
+            animator.SetBool("Attack", false);
+            agent.isStopped = true;
+        }
+        else if (mode == "Damage")
+        {
+            state = EnemyState.Damage;
+            animator.SetTrigger("Damage");
+            agent.isStopped = true;
+        }
+        else if (mode == "Dead")
+        {
+            state = EnemyState.Dead;
+            enemyController.enabled = false;
+            agent.isStopped = true;
+        }
+    }
+
+
     public void Dead()
     {
         SetState("Dead");

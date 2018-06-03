@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65837699433835044}
   - component: {fileID: 114753647427556940}
   - component: {fileID: 114200131703127074}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 5
   ShotPower: 0
-  weaponType: Staff
+  weaponType: 1
   weaponRange: 0
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 44.816, y: -88.95901, z: -88.523}

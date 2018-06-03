@@ -121,7 +121,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 SetState(MyState.Attack);
             }
-            else if (Input.GetButton("Fire2") && myStatus.GetWeapomStatus() != null && myStatus.GetWeapomStatus().GetWeaponType() == "Gun")
+            else if (Input.GetButton("Fire2") && myStatus.GetWeapomStatus() != null && myStatus.GetWeapomStatus().GetWeaponType() == WeapomStatus.WeaponType.Gun)
             {
                 SetState(MyState.WaitShot);
                 animator.SetBool("WaitShot", true);
@@ -143,7 +143,6 @@ public class PlayerMove : MonoBehaviour {
                 shot.SetAbleRaserPointer();
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    shot.SetAbleLight();
                     shot.JudgeShot();
                 }
             }

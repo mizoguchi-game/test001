@@ -11,6 +11,9 @@ public class MyStatus : MonoBehaviour {
     private int power;
     private WeapomStatus weapomStatus;
 
+    [SerializeField]
+    private int numOfBulletsForGun;
+
     private GameObject equip;
 
     public void SetEquip(GameObject weapon)
@@ -47,5 +50,18 @@ public class MyStatus : MonoBehaviour {
     public int GetShotPower()
     {
         return GetWeapomStatus().GetShotPower();
+    }
+
+    //弾の数を設定
+    public int SetNumberOfBullet(int num)
+    {
+        numOfBulletsForGun = num;
+        return num;
+    }
+
+    //弾の数を取得
+    public int GetNumberOfBullet()
+    {
+        return numOfBulletsForGun;
     }
 }

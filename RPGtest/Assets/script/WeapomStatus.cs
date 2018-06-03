@@ -9,7 +9,7 @@ public class WeapomStatus : MonoBehaviour {
     [SerializeField]
     private int ShotPower;
     [SerializeField]
-    private string weaponType;
+    private WeaponType weaponType;
     [SerializeField]
     private float weaponRange;
     [SerializeField]
@@ -18,6 +18,13 @@ public class WeapomStatus : MonoBehaviour {
     private Vector3 rot;
     [SerializeField]
     private Vector3 scale;
+
+    public enum WeaponType
+    {
+        Sword,
+        Staff,
+        Gun
+    }
 
     public int GetAttackPower()
     {
@@ -29,7 +36,7 @@ public class WeapomStatus : MonoBehaviour {
         return ShotPower;
     }
 
-    public string GetWeaponType()
+    public WeaponType GetWeaponType()
     {
         return weaponType;
     }

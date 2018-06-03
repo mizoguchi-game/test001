@@ -17,7 +17,7 @@ public class AttackWeapon : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             Debug.Log("敵にあたった");
-            other.GetComponent<Enemy>().TakeDamage(myStatus.GetAttackPower(),other.ClosestPointOnBounds(transform.position));
+            other.transform.root.GetComponent<Enemy>().TakeDamage(myStatus.GetAttackPower(),other.ClosestPointOnBounds(transform.position));
         }
     }
 }

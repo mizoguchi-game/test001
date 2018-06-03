@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shot : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class Shot : MonoBehaviour {
     private float rayRange;
     [SerializeField]
     private Transform equip;
+
+    private AudioSource audioSource;
 
     //レーザーポインター
     private LineRenderer raserPointer;
@@ -34,14 +37,27 @@ public class Shot : MonoBehaviour {
     //銃の発射工
     [SerializeField]
     private Transform muzzle;
+    //弾の数を表示しているUI
+    [SerializeField]
+    private Text bulletText;
+    //発射音
+    [SerializeField]
+    private AudioClip ShotSE;
+    //弾が無い時の音
+    [SerializeField]
+    private AudioClip noBulletSE;
 
 	// Use this for initialization
 	void Start () {
         myStatus = GetComponent<MyStatus>();
         move = GetComponent<PlayerMove>();
         rayRange = 1000f;
+        audioSource = gameObject.GetComponent<AudioSource>();
         Debug.Log(equip.childCount);
-	}
+        bulletText.text = myStatus.GetNumberOfBullet().ToString();
+
+
+    }
 	
     public void SetAbleRaserPointer()
     {
@@ -62,6 +78,12 @@ public class Shot : MonoBehaviour {
     public void SetDisableLight()
     {
         shotLigth.enabled = false;
+    }
+
+    public void PlaySE(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     public void SetComponent(Transform muzzleTransform)
@@ -112,9 +134,9 @@ public class Shot : MonoBehaviour {
                 distance = Vector3.Distance(muzzle.position, hit.point);
             }
             //Enemyレイヤーとの接触
-            if (Physics.Raycast(ray,out hit,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Enemy")))
+            if (Physics.Raycast(ray,out hit,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("EnemyHit")))
             {
-                if (hit.collider.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
+                if (hit.collider.transform.root.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
                 {
                     shotPoint.enabled = true;
                     hitFlag = true;
@@ -167,12 +189,22 @@ public class Shot : MonoBehaviour {
         RaycastHit hitPoint;
         distance = rayRange;
 
+        //弾がなければ弾がない時の効果音を鳴らしreturnする
+        if (myStatus.GetNumberOfBullet() <= 0)
+        {
+            PlaySE(noBulletSE);
+            return;
+        }
+
+        SetAbleLight();
+        PlaySE(ShotSE);
+        bulletText.text = myStatus.SetNumberOfBullet(myStatus.GetNumberOfBullet() - 1).ToString();
         //フィールド
         if (Physics.Raycast(ray, out hitPoint, myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Field")))
         {
             distance = Vector3.Distance(muzzle.position, hitPoint.point);
         }
-        if(Physics.Raycast(ray,out hitPoint,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Enemy")))
+        if(Physics.Raycast(ray,out hitPoint,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("EnemyHit")))
         {
             if (distance > Vector3.Distance(muzzle.position,hitPoint.point))
             {

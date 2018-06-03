@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114806623024683604}
   - component: {fileID: 114695731216126138}
   - component: {fileID: 136291152906122082}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Frontloader Standard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 0
   ShotPower: 5
-  weaponType: Gun
+  weaponType: 2
   weaponRange: 100
   pos: {x: 0, y: 0, z: 0}
   rot: {x: -120, y: -170, z: 0}
@@ -284,8 +284,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.06681442
-        value: 0.26758003
+        time: 0.01499939
+        value: 0.01458168
         inSlope: 0
         outSlope: 0
         tangentMode: 0
