@@ -19,15 +19,20 @@ public class OpneDoor : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown("space") && isNear)
         {
-            animator.SetBool("Open", !animator.GetBool("open"));
+            animator.SetBool("Open", !animator.GetBool("Open"));
         }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (true)
+        if (other.tag =="Player" )
         {
-
+            isNear = true;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isNear = false;
     }
 }
