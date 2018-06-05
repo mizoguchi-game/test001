@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4424914, g: 0.4915685, b: 0.57141143, a: 1}
+  m_IndirectSpecularColor: {r: 0.44249132, g: 0.4915684, b: 0.5714111, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -101,7 +101,7 @@ NavMeshSettings:
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -3560,7 +3560,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1463525089}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3569,10 +3569,24 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1463525092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1463525089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea119dda781016c40ba551079c81d984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1729063338}
+  arrivedDistance: 0.5
+  followDistance: 1
 --- !u!1 &1469750174
 GameObject:
   m_ObjectHideFlags: 0
