@@ -50,12 +50,14 @@ public class Enemy : MonoBehaviour {
         Attack,
         Freeze,
         Damage,
-        Dead
+        Dead,
+        Patrol
     };
 
     [SerializeField]
     private float freezeTime = 3f;
 
+    private int walkcount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -140,13 +142,15 @@ public class Enemy : MonoBehaviour {
     //agent用アップデート
     void Update()
     {
+        Debug.Log(state);
+        Debug.Log(setPositon.GetDestination());
         if (state == EnemyState.Dead)
         {
             return;
         }
         //Debug.Log(state);
         //見回りまたはキャラクターを追いかける状態
-        if (state == EnemyState.Walk || state == EnemyState.Chase)
+        if (state == EnemyState.Walk || state == EnemyState.Chase || state == EnemyState.Patrol)
         {
             //キャラクターを追いかける状態であればキャラクターの目的地を再設定
             if (state == EnemyState.Chase)
@@ -155,11 +159,17 @@ public class Enemy : MonoBehaviour {
                 agent.SetDestination(setPositon.GetDestination());
             }
 
+            if (walkcount > 3 && state != EnemyState.Patrol)
+            {
+                SetState("Patrol");
+            }
+
             //エージェントの潜在的な速さを設定
-            animator.SetFloat("Speed",agent.desiredVelocity.magnitude);
+            animator.SetFloat("speed",agent.desiredVelocity.magnitude);
 
             if (state == EnemyState.Walk)
             {
+                
                 //目的地に到着したかどうかの判定
                 if (agent.remainingDistance < 0.7f)
                 {
@@ -174,7 +184,16 @@ public class Enemy : MonoBehaviour {
                 {
                     SetState("attack");
                 }
+            }else if (state == EnemyState.Patrol)
+            {
+                //目的地に到着したかどうかの判定
+                if (agent.remainingDistance < 3f)
+                {
+                    SetState("wait");
+                    animator.SetFloat("speed", 0.0f);
+                }
             }
+
             //目的地に到着していた場合一定時間待機
         }
         else if (state == EnemyState.Wait)
@@ -305,6 +324,7 @@ public class Enemy : MonoBehaviour {
             setPositon.CreateRandomPosition();
             agent.SetDestination(setPositon.GetDestination());
             agent.isStopped = false;
+            walkcount++;
         }
         else if (mode == "chase")
         {
@@ -314,6 +334,7 @@ public class Enemy : MonoBehaviour {
             setPositon.setDestination(playerTranform.position);
             agent.SetDestination(setPositon.GetDestination());
             agent.isStopped = false;
+            walkcount = 0;
 
         }
         else if (mode == "wait")
@@ -330,6 +351,7 @@ public class Enemy : MonoBehaviour {
             animator.SetFloat("speed", 0f);
             agent.isStopped = true;
             animator.SetBool("Attack", true);
+            walkcount = 0;
         }
         else if (mode == "freeze")
         {
@@ -350,6 +372,14 @@ public class Enemy : MonoBehaviour {
             state = EnemyState.Dead;
             enemyController.enabled = false;
             agent.isStopped = true;
+        }else if(mode == "Patrol")
+        {
+            arrived = false;
+            elapsedTime = 0f;
+            state = EnemyState.Patrol;
+            setPositon.NextPosition();
+            agent.SetDestination(setPositon.GetDestination());
+            agent.isStopped = false;
         }
     }
 
