@@ -13,7 +13,7 @@ public class ItemDataBase : MonoBehaviour {
         itemLists[1] = new ItemData(Resources.Load("Sword", typeof(Sprite)) as Sprite,"杖",MyItemStatus.Item.Staff,"ただの杖");
     }
 
-    public ItemData[] GetItemDatas()
+    public ItemData[] GetItemData()
     {
         return itemLists;
     }

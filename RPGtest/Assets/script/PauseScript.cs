@@ -10,10 +10,13 @@ public class PauseScript : MonoBehaviour {
 
     //ポーズUIのインスタンス
     private GameObject instancePauseUI;
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown("q"))
+
+    [SerializeField]
+    private GameObject PropertyUI;
+
+    // Update is called once per frame
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (instancePauseUI == null)
             {
@@ -26,5 +29,18 @@ public class PauseScript : MonoBehaviour {
                 Time.timeScale = 1f;
             }
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (PropertyUI.activeSelf == false)
+            {
+                PropertyUI.SetActive(true);
+            }
+            else
+            {
+                PropertyUI.SetActive(false);
+            }
+
+        }
+    }
 }
