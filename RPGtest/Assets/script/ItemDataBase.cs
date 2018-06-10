@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemDataBase : MonoBehaviour {
 
-    public ItemData[] itemLists = new ItemData[2];
+    private ItemData[] itemLists = new ItemData[2];
 
     private void Awake()
     {

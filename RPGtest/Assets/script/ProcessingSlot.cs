@@ -35,12 +35,13 @@ public class ProcessingSlot : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        informatioonText = transform.parent.parent.Find("Infomation").GetChild(0).GetComponent<Text>();
+        informatioonText = transform.parent.parent.Find("Information").GetChild(0).GetComponent<Text>();
 		
 	}
 
     public void MouseOver()
     {
+        Debug.Log("MausOver呼ばれた");
         if (uiObj != null)
         {
             Destroy(uiObj);
