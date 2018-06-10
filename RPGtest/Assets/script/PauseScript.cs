@@ -16,6 +16,7 @@ public class PauseScript : MonoBehaviour {
 
     private RectTransform title;
     private RectTransform main;
+    private RectTransform equip;
     private RectTransform information;
 
     private int width;
@@ -27,13 +28,15 @@ public class PauseScript : MonoBehaviour {
     {
         title = PropertyUI.transform.GetChild(0).Find("Title").GetComponent<RectTransform>();//11%
         main = PropertyUI.transform.GetChild(0).Find("main").GetComponent<RectTransform>();//68%
+        equip = PropertyUI.transform.GetChild(0).Find("Equip").GetComponent<RectTransform>();//68%
         information = PropertyUI.transform.GetChild(0).Find("Information").GetComponent<RectTransform>();//20%
 
         width = Screen.width;
         height = Screen.height;
 
         title.sizeDelta = new Vector2(width,(float)(height * 0.11));
-        main.sizeDelta = new Vector2(width, (float)(height * 0.68));
+        main.sizeDelta = new Vector2((float)(width * 0.89), (float)(height * 0.68));
+        equip.sizeDelta = new Vector2((float)(width * 0.1), (float)(height * 0.68));
         information.sizeDelta = new Vector2(width, (float)(height * 0.20));
     }
 
@@ -84,7 +87,8 @@ public class PauseScript : MonoBehaviour {
             if (changeWindouSize == true)
             {
                 title.sizeDelta = new Vector2(width, (float)(height * 0.11));
-                main.sizeDelta = new Vector2(width, (float)(height * 0.68));
+                main.sizeDelta = new Vector2((float)(width * 0.89), (float)(height * 0.68));
+                equip.sizeDelta = new Vector2((float)(width * 0.1), (float)(height * 0.68));
                 information.sizeDelta = new Vector2(width, (float)(height * 0.20));
                 changeWindouSize = false;
             }
