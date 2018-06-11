@@ -15,6 +15,11 @@ public class ProcessingSlot : MonoBehaviour {
     //自身のアイテムデータを入れておく
     [SerializeField]
     public ItemData myItemData;
+    //ドラッグするUIPrefab
+    [SerializeField]
+    private GameObject dragItemUI;
+    //ドラッグしているUIインスタンス
+    private GameObject instanceDragItemUI;
 
     //スロットが非アクティブになったら削除
     private void OnDisable()
@@ -65,5 +70,22 @@ public class ProcessingSlot : MonoBehaviour {
             informatioonText.text = "";
             Destroy(uiObj);
         }
+    }
+
+    public void MouseBeginDrag()
+    {
+        if (myItemData.GetItemType() == MyItemStatus.Item.Gun
+            || myItemData.GetItemType() == MyItemStatus.Item.Staff
+            || myItemData.GetItemType() == MyItemStatus.Item.Sword)
+        {
+            instanceDragItemUI = Instantiate(dragItemUI, Input.mousePosition, Quaternion.identity) as GameObject;//オブジェクト生成
+            instanceDragItemUI.transform.SetParent(transform.parent.parent);//親を設定
+            instanceDragItemUI.GetComponent<DragItemData>().SetDragItem(myItemData);
+        }
+    }
+
+    public void MouseEndDrag()
+    {
+        Destroy(instanceDragItemUI);
     }
 }

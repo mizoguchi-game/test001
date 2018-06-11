@@ -29,8 +29,10 @@ public class DragItemData : MonoBehaviour {
 
     //ドラックアイテムが設定されている場合はマウスを追従
 	void Update () {
+        Debug.Log("dragItemData:"+dragItemData.GetItemName());
         if (dragItemData != null)
         {
+            Debug.Log("ドラッグ移動中");
             transform.position = Input.mousePosition;
         }
 	}

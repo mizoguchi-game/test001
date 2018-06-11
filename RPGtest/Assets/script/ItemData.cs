@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemData : Object {
+public class ItemData{
 
     //アイテムのImage画像
     private Sprite itemSprite;

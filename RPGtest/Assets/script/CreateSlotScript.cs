@@ -22,10 +22,9 @@ public class CreateSlotScript : MonoBehaviour {
         CreateSlot(itemDataBase.GetItemData());
     }
 
-    public void CreateSlot(ItemData[] itemLists) {
+    public void CreateSlot(List<ItemData> itemLists) {
         int i = 0;
-
-        foreach (var item in itemLists)
+        foreach (ItemData item in itemLists)
         {
             if (myItemStatus.GetItemFlag(item.GetItemType()))
             {
@@ -39,6 +38,7 @@ public class CreateSlotScript : MonoBehaviour {
                 instanceSlot.transform.localScale = new Vector3(1f, 1f, 1f);
                 //アイテムの情報をスロットのProcessingSlotに設定する
                 instanceSlot.GetComponent<ProcessingSlot>().SetItemData(item);
+                Debug.Log(item.GetItemName());
             }
         }
     }
