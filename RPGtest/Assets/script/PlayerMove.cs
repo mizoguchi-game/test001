@@ -121,7 +121,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 SetState(MyState.Attack);
             }
-            else if (Input.GetButton("Fire2") && myStatus.GetWeapomStatus() != null && myStatus.GetWeapomStatus().GetWeaponType() == WeapomStatus.WeaponType.Gun)
+            else if (Input.GetButton("Fire2") && myStatus.GetWeapomStatus() != null && myStatus.GetWeapomStatus().GetWeaponType() == ItemDataBase.Item.Gun)
             {
                 SetState(MyState.WaitShot);
                 animator.SetBool("WaitShot", true);

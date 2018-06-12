@@ -9,11 +9,11 @@ public class ItemData{
     //アイテム名
     private string itemName;
     //アイテムのタイプ
-    private MyItemStatus.Item itemType;
+    private ItemDataBase.Item itemType;
     //アイテムの情報
     private string itemInformation;
 
-    public ItemData(Sprite image,string itemName,MyItemStatus.Item itemType,string information)
+    public ItemData(Sprite image,string itemName,ItemDataBase.Item itemType,string information)
     {
         this.itemSprite = image;
         this.itemName = itemName;
@@ -31,7 +31,7 @@ public class ItemData{
         return itemName;
     }
 
-    public MyItemStatus.Item GetItemType()
+    public ItemDataBase.Item GetItemType()
     {
         return itemType;
     }

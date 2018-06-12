@@ -46,7 +46,7 @@ public class ProcessingSlot : MonoBehaviour {
 
     public void MouseOver()
     {
-        Debug.Log("MausOver呼ばれた");
+        
         if (uiObj != null)
         {
             Destroy(uiObj);
@@ -74,16 +74,16 @@ public class ProcessingSlot : MonoBehaviour {
 
     public void MouseBeginDrag()
     {
-        if (myItemData.GetItemType() == MyItemStatus.Item.Gun
-            || myItemData.GetItemType() == MyItemStatus.Item.Staff
-            || myItemData.GetItemType() == MyItemStatus.Item.Sword)
+        if (myItemData.GetItemType() == ItemDataBase.Item.Gun
+            || myItemData.GetItemType() == ItemDataBase.Item.Staff
+            || myItemData.GetItemType() == ItemDataBase.Item.Sword)
         {
             instanceDragItemUI = Instantiate(dragItemUI, Input.mousePosition, Quaternion.identity) as GameObject;//オブジェクト生成
             instanceDragItemUI.transform.SetParent(transform.parent.parent);//親を設定
             instanceDragItemUI.GetComponent<DragItemData>().SetDragItem(myItemData);
         }
     }
-
+    
     public void MouseEndDrag()
     {
         Destroy(instanceDragItemUI);

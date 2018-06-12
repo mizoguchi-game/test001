@@ -10,7 +10,7 @@ public class CreateSlotScript : MonoBehaviour {
     private GameObject slot;
     //主人公のステータス
     [SerializeField]
-    private MyItemStatus myItemStatus;
+    private MyStatus myItemStatus;
     //アイテムデータベース
     [SerializeField]
     private ItemDataBase itemDataBase;

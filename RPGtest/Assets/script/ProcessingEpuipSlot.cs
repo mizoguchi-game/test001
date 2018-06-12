@@ -4,10 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ProcessingEpuipSlot : MonoBehaviour {
-
+    
     private ItemData myItemData;
     [SerializeField]
     private Text informationText;
+    [SerializeField]
+    private MyStatus myStatus;
+
+    //装備スロットの番号
+    [SerializeField]
+    private int slotNum;
+
+    //装備切り替え処理スクリプト
+    [SerializeField]
+    private ChangeEquip changeEquip;
 
     public void MouseOver()
     {
@@ -25,18 +35,28 @@ public class ProcessingEpuipSlot : MonoBehaviour {
         }
     }
 
+    //スロットの上にアイテムがドロップされた際に実行
     public void MouseDrop()
     {
         if (FindObjectOfType<DragItemData>() == null)
         {
             return;
         }
-
         //DragItemUIに設定されているDragItemDataスクリプトからアイテムを取得
         var dragitemdata = FindObjectOfType<DragItemData>();
         myItemData = dragitemdata.GetItem();
         //ドラッグしているアイテムの削除
         dragitemdata.DeleteDragItem();
+        //MyStatusスクリプトの装備スロットにアイテム情報を設定
+        myStatus.SetItemData(myItemData, slotNum);
+
+        if (changeEquip.GetEquipSlotNum() == slotNum)
+        {
+            changeEquip.InstantiateWepon(slotNum);
+        }
+
+        transform.GetChild(0).GetComponent<Image>().color = Color.white;
+
         ShowInformation();
     }
 

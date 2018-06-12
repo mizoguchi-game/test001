@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MyStatus : MonoBehaviour {
 
@@ -15,6 +16,37 @@ public class MyStatus : MonoBehaviour {
     private int numOfBulletsForGun;
 
     private GameObject equip;
+
+    //アイテムを持っているかどうかのフラグ
+    [SerializeField]
+    private bool[] ItemFlags = new bool[6];
+
+    //装備スロットに装備している武器
+    [SerializeField]
+    private ItemData[] equipSlotDatas = new ItemData[4];
+
+    //ゲーム画面に装備スロットの親パネル
+    [SerializeField]
+    private Transform equipPanel;
+
+    //アイテムスロットにアイテムデータをセット
+    public void SetItemData(ItemData itemData, int SlotNum)
+    {
+        equipSlotDatas[SlotNum] = itemData;
+        equipPanel.GetChild(SlotNum).GetChild(0).GetComponent<Image>().sprite = itemData.GetItemSprite();
+    }
+
+    //装備スロットの武器情報取得メソッド
+    public ItemData GetEquipSlotData(int num)
+    {
+        return equipSlotDatas[num];
+    }
+
+    //アイテムを保持しているかどうか
+    public bool GetItemFlag(ItemDataBase.Item item)
+    {
+        return ItemFlags[(int)item];
+    }
 
     public void SetEquip(GameObject weapon)
     {

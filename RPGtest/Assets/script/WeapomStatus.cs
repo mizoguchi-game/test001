@@ -9,22 +9,17 @@ public class WeapomStatus : MonoBehaviour {
     [SerializeField]
     private int ShotPower;
     [SerializeField]
-    private WeaponType weaponType;
+    private ItemDataBase.Item ItemType;
     [SerializeField]
     private float weaponRange;
+
+    //インスタンス化した時の武器の位置、角度、サイズデータ
     [SerializeField]
     private Vector3 pos;
     [SerializeField]
     private Vector3 rot;
     [SerializeField]
     private Vector3 scale;
-
-    public enum WeaponType
-    {
-        Sword,
-        Staff,
-        Gun
-    }
 
     public int GetAttackPower()
     {
@@ -36,9 +31,9 @@ public class WeapomStatus : MonoBehaviour {
         return ShotPower;
     }
 
-    public WeaponType GetWeaponType()
+    public ItemDataBase.Item GetWeaponType()
     {
-        return weaponType;
+        return ItemType;
     }
 
     public float GetWeaponRange()

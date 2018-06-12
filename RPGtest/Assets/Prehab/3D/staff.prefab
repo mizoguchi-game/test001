@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 5
   ShotPower: 0
-  weaponType: 1
+  ItemType: 0
   weaponRange: 0
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 44.816, y: -88.95901, z: -88.523}

@@ -92,15 +92,18 @@ public class Shot : MonoBehaviour {
         shotLigth = equip.GetComponentInChildren<Light>();
         muzzle = muzzleTransform.Find("Muzzle");
         /*muzzle = equip.GetChild(0).Find("Muzzle");*/
+        /*
         Debug.Log("equip:"+ equip);
         Debug.Log("raserPointer:" + raserPointer);
         Debug.Log("muzzle:"+muzzle);
+        */
     }
     public void SetComponent()
     {
         raserPointer = equip.GetComponentInChildren<LineRenderer>();
         shotLigth = equip.GetComponentInChildren<Light>();
         muzzle = equip.GetChild(0).Find("Muzzle");
+        /*
         var tmp1 = equip.GetChild(0);
         var tmp2 = equip.childCount;
         Debug.Log("equip:" + equip);
@@ -108,6 +111,7 @@ public class Shot : MonoBehaviour {
         Debug.Log("muzzle:" + muzzle);
         Debug.Log("tmp1子名:" + tmp1);
         Debug.Log("tmp2子の数:" + tmp2);
+        */
 
     }
 
