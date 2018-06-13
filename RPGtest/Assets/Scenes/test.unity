@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4424914, g: 0.4915685, b: 0.57141143, a: 1}
+  m_IndirectSpecularColor: {r: 0.44249132, g: 0.4915684, b: 0.5714111, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1353,9 +1353,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 1385058867}
-  myStatus: {fileID: 0}
-  slotNum: 0
-  changeEquip: {fileID: 0}
+  myStatus: {fileID: 1729063346}
+  slotNum: 3
+  changeEquip: {fileID: 1729063343}
 --- !u!1 &362575693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3980,9 +3980,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 1385058867}
-  myStatus: {fileID: 0}
+  myStatus: {fileID: 1729063346}
   slotNum: 0
-  changeEquip: {fileID: 0}
+  changeEquip: {fileID: 1729063343}
 --- !u!114 &1118834301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4194,9 +4194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 1385058867}
-  myStatus: {fileID: 0}
-  slotNum: 0
-  changeEquip: {fileID: 0}
+  myStatus: {fileID: 1729063346}
+  slotNum: 1
+  changeEquip: {fileID: 1729063343}
 --- !u!1 &1139458533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,7 +4670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4800,7 +4800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5283,7 +5283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6026,9 +6026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 1385058867}
-  myStatus: {fileID: 0}
-  slotNum: 0
-  changeEquip: {fileID: 0}
+  myStatus: {fileID: 1729063346}
+  slotNum: 2
+  changeEquip: {fileID: 1729063343}
 --- !u!1 &1576779206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,7 +6728,7 @@ MonoBehaviour:
   - {fileID: 1519046392626124, guid: a6f17e86f9f90b3479f91cb837b7d6af, type: 2}
   - {fileID: 1664038631714706, guid: 606604723b4e7df419b25f96bc05a124, type: 2}
   equip: {fileID: 432194910}
-  equipPanel: {fileID: 0}
+  equipPanel: {fileID: 1938641267}
 --- !u!136 &1729063344
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7100,7 +7100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

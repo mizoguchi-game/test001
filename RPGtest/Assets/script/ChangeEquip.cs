@@ -92,8 +92,8 @@ public class ChangeEquip : MonoBehaviour {
         {
             DestroyImmediate(weapon);
             //Destroy(equip.GetChild(0).gameObject);
-            Debug.Log("削除後子数：" + equip.childCount);
-            Debug.Log("削除後子名：" + equip.GetChild(0));
+            //Debug.Log("削除後子数：" + equip.childCount);
+            //Debug.Log("削除後子名：" + equip.GetChild(0));
         }
         for (int i = 0; i < equipPanel.childCount; i++)
         {
