@@ -46,6 +46,7 @@ public class Shot : MonoBehaviour {
     //弾が無い時の音
     [SerializeField]
     private AudioClip noBulletSE;
+    [SerializeField] private GameObject bulletHolePrehub;//弾痕のプレハブ
 
 	// Use this for initialization
 	void Start () {
@@ -190,7 +191,9 @@ public class Shot : MonoBehaviour {
     public void JudgeShot()
     {
         Ray ray = new Ray(muzzle.position, muzzle.forward);
-        RaycastHit hitPoint;
+        RaycastHit hitPointField;
+        RaycastHit hitPointEnemy;
+        
         distance = rayRange;
 
         //弾がなければ弾がない時の効果音を鳴らしreturnする
@@ -204,22 +207,28 @@ public class Shot : MonoBehaviour {
         PlaySE(ShotSE);
         bulletText.text = myStatus.SetNumberOfBullet(myStatus.GetNumberOfBullet() - 1).ToString();
         //フィールド
-        if (Physics.Raycast(ray, out hitPoint, myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Field")))
+        if (Physics.Raycast(ray, out hitPointField, myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Field")))
         {
-            distance = Vector3.Distance(muzzle.position, hitPoint.point);
+            distance = Vector3.Distance(muzzle.position, hitPointField.point);
         }
-        if(Physics.Raycast(ray,out hitPoint,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("EnemyHit")))
+        if(Physics.Raycast(ray,out hitPointEnemy,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("EnemyHit")))
         {
-            if (distance > Vector3.Distance(muzzle.position,hitPoint.point))
+            if (distance > Vector3.Distance(muzzle.position,hitPointEnemy.point))
             {
-                var enemyObj = hitPoint.collider.gameObject.transform.root;
+                var enemyObj = hitPointEnemy.collider.gameObject.transform.root;
 
                 if (enemyObj.GetComponent<Enemy>().GetState() != Enemy.EnemyState.Dead)
                 {
                     var enemt = enemyObj.GetComponent<Enemy>();
-                    enemt.TakeDamage(myStatus.GetShotPower(),hitPoint.collider.transform,hitPoint.point);
+                    enemt.TakeDamage(myStatus.GetShotPower(),hitPointEnemy.collider.transform,hitPointEnemy.point);
                 }
             }
+        }
+        if (hitPointEnemy.transform != null)
+        {
+            var bulletHoleInstance = Instantiate(bulletHolePrehub,hitPointEnemy.point - muzzle.forward * 0.001f,Quaternion.FromToRotation(Vector3.up,hitPointEnemy.normal)) as GameObject;
+            bulletHoleInstance.transform.SetParent(hitPointEnemy.collider.transform);
+            Destroy(bulletHolePrehub,30.0f);
         }
     }
 
