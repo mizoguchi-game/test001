@@ -159,6 +159,23 @@ public class Shot : MonoBehaviour {
                     }
                 }
             }
+            if (Physics.Raycast(ray,out hit,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Block")))
+            {
+                shotPoint.enabled = true;
+                hitFlag = true;
+
+                //Fieldレイヤーとの接触よりEnemyレイヤーとの接触が近い場合
+                if (Vector3.Distance(muzzle.position, hit.point) < distance)
+                {
+                    nearPoint = hit.point;
+                    shotPoint.transform.position = hit.point;
+                    //Fieldレイヤーのほうが近い場合shotpointを無効か
+                }
+                else
+                {
+                    shotPoint.enabled = false;
+                }
+            }
             //何らかに接触していたら接触した一番近い位置をレザーポイントの
             if (hitFlag)
             {
@@ -193,7 +210,8 @@ public class Shot : MonoBehaviour {
         Ray ray = new Ray(muzzle.position, muzzle.forward);
         RaycastHit hitPointField;
         RaycastHit hitPointEnemy;
-        
+        RaycastHit hitPointBlock;
+
         distance = rayRange;
 
         //弾がなければ弾がない時の効果音を鳴らしreturnする
@@ -211,6 +229,7 @@ public class Shot : MonoBehaviour {
         {
             distance = Vector3.Distance(muzzle.position, hitPointField.point);
         }
+        //エネミー
         if(Physics.Raycast(ray,out hitPointEnemy,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("EnemyHit")))
         {
             if (distance > Vector3.Distance(muzzle.position,hitPointEnemy.point))
@@ -223,6 +242,11 @@ public class Shot : MonoBehaviour {
                     enemt.TakeDamage(myStatus.GetShotPower(),hitPointEnemy.collider.transform,hitPointEnemy.point);
                 }
             }
+        }
+        if (Physics.Raycast(ray,out hitPointBlock,myStatus.GetWeapomStatus().GetWeaponRange(),LayerMask.GetMask("Block")))
+        {
+            distance = Vector3.Distance(muzzle.position,hitPointBlock.point);
+            hitPointBlock.rigidbody.AddForce(muzzle.forward * 500f);
         }
         if (hitPointEnemy.transform != null)
         {

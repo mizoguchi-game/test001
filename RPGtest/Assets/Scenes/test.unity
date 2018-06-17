@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44249132, g: 0.4915684, b: 0.5714111, a: 1}
+  m_IndirectSpecularColor: {r: 0.4424914, g: 0.4915685, b: 0.57141143, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1873,7 +1873,7 @@ HingeJoint:
   m_GameObject: {fileID: 484607391}
   m_ConnectedBody: {fileID: 1538181344}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: -0.36000013, z: 0.03999996}
   m_UseSpring: 1
@@ -6205,7 +6205,7 @@ HingeJoint:
   m_GameObject: {fileID: 1535946682}
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: -0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 4.865, z: -3.86}
   m_UseSpring: 1
@@ -6341,7 +6341,7 @@ HingeJoint:
   m_GameObject: {fileID: 1538181343}
   m_ConnectedBody: {fileID: 1535946683}
   m_Anchor: {x: 0, y: 1, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: -0.2349999, z: 0.07999992}
   m_UseSpring: 1
