@@ -252,7 +252,7 @@ public class Shot : MonoBehaviour {
         {
             var bulletHoleInstance = Instantiate(bulletHolePrehub,hitPointEnemy.point - muzzle.forward * 0.001f,Quaternion.FromToRotation(Vector3.up,hitPointEnemy.normal)) as GameObject;
             bulletHoleInstance.transform.SetParent(hitPointEnemy.collider.transform);
-            Destroy(bulletHolePrehub,30.0f);
+            Destroy(bulletHoleInstance, 30.0f);
         }
         if(hitPointField.transform != null)
         {

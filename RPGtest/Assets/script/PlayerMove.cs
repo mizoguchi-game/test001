@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour {
 
     public float Walk = 2f;
     public float Run = 4f;
-    public float thrust = -2;
+    public float thrust = 200;
     public float rotateSpeed = 2;
 
     private Vector3 velocity;
@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour {
     private Animator animator;
 
     bool ground;
+
+    private bool junpflag = false;
 
     private Shot shot;
 
@@ -108,13 +110,19 @@ public class PlayerMove : MonoBehaviour {
             //ジャンプ処理
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                animator.SetBool("Junping", true);
-                rb.AddForce(new Vector3(0, thrust, 0));
-                ground = false;
+                if (ground == true)
+                {
+                    Debug.Log("ジャンプ");
+                    animator.SetBool("Junping", true);
+                    rb.AddForce(new Vector3(0, thrust, 0));
+                    ground = false;
+                    junpflag = true;
+                }
             }
-            else
+            if (ground == true && junpflag == true)
             {
-                animator.SetBool("Junping", false);
+                animator.SetBool("Junping",false);
+                junpflag = false;
             }
 
             if (Input.GetButtonDown("Fire1"))
@@ -254,5 +262,15 @@ public class PlayerMove : MonoBehaviour {
     public void SetReadyShot()
     {
         waitShotFlag = true;
+    }
+
+    //アイテム取得
+    public void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Item")
+        {
+            Debug.Log("アイテムを入手した");
+            Destroy(col.gameObject);
+        }
     }
 }

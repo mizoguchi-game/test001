@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4424914, g: 0.4915685, b: 0.57141143, a: 1}
+  m_IndirectSpecularColor: {r: 0.44249132, g: 0.4915684, b: 0.5714111, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2632,7 +2632,7 @@ GameObject:
   - component: {fileID: 624916704}
   m_Layer: 13
   m_Name: DropItem
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2647,7 +2647,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0.28500003}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -3823,7 +3823,7 @@ GameObject:
   - component: {fileID: 978053606}
   - component: {fileID: 978053605}
   - component: {fileID: 978053604}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4415,7 +4415,7 @@ GameObject:
   - component: {fileID: 1115599484}
   - component: {fileID: 1115599483}
   - component: {fileID: 1115599482}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7022,7 +7022,7 @@ GameObject:
   - component: {fileID: 1576779209}
   - component: {fileID: 1576779208}
   - component: {fileID: 1576779207}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7653,7 +7653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walk: 2
   Run: 4
-  thrust: -2
+  thrust: 50
   rotateSpeed: 2
   xAxis: 0
   xAxisLimit: 60
