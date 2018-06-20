@@ -80,7 +80,7 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-
+        Debug.Log(ground);
         if (state == MyState.Normal) {
             if (ground)
             {
@@ -106,25 +106,12 @@ public class PlayerMove : MonoBehaviour {
                 rb.velocity = velocity;
 
                 rb.angularVelocity = new Vector3(0f, 0f, 0f);
-            }
-            //ジャンプ処理
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (ground == true)
+
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("ジャンプ");
                     animator.SetBool("Junping", true);
-                    rb.AddForce(new Vector3(0, thrust, 0));
-                    ground = false;
-                    junpflag = true;
                 }
             }
-            if (ground == true && junpflag == true)
-            {
-                animator.SetBool("Junping",false);
-                junpflag = false;
-            }
-
             if (Input.GetButtonDown("Fire1"))
             {
                 SetState(MyState.Attack);
@@ -181,7 +168,10 @@ public class PlayerMove : MonoBehaviour {
 
     private void OnCollisionStay(Collision col)
     {
-        ground = true;
+        if (col.gameObject.layer == LayerMask.NameToLayer("Field"))
+        {
+            ground = true;
+        }
     }
 
     public void TakeDamage(Transform enemyTransform)
@@ -189,6 +179,20 @@ public class PlayerMove : MonoBehaviour {
         state = MyState.Damage;
         velocity = Vector3.zero;
         animator.SetTrigger("Damage");
+    }
+
+    public void JunpStart()
+    {
+        Debug.Log("JunpStart");
+        rb.velocity = new Vector3(0, thrust, 0);
+        ground = false;
+        junpflag = true;
+    }
+
+    public void JunpEnd()
+    {
+        animator.SetBool("Junping", false);
+        junpflag = false;
     }
 
     private void OnAnimatorIK()
