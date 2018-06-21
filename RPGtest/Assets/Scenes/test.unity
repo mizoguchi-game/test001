@@ -2112,6 +2112,7 @@ GameObject:
   - component: {fileID: 490096573}
   - component: {fileID: 490096575}
   - component: {fileID: 490096574}
+  - component: {fileID: 490096576}
   m_Layer: 12
   m_Name: Sensor
   m_TagString: FallFloor
@@ -2142,8 +2143,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.98168564, y: 3.5308366, z: 1}
+  m_Center: {x: 0.009157181, y: 1.2654183, z: 0}
 --- !u!33 &490096575
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2151,6 +2152,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 490096572}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &490096576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490096572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c80102fb0e45664abe60ff62f64cf4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &492441119
 GameObject:
   m_ObjectHideFlags: 0
@@ -7766,9 +7778,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1729063338}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 45
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -7787,7 +7799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walk: 2
   Run: 4
-  thrust: 7
+  thrust: 5
   rotateSpeed: 2
   xAxis: 0
   xAxisLimit: 60
@@ -9540,6 +9552,7 @@ GameObject:
   - component: {fileID: 2119233198}
   - component: {fileID: 2119233197}
   - component: {fileID: 2119233201}
+  - component: {fileID: 2119233202}
   m_Layer: 12
   m_Name: FallFloor1
   m_TagString: FallFloor
@@ -9630,6 +9643,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2119233202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2119233196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd00b1c1b914a6468f21417ceebb9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropType: 0
+  enterDropTime: 5
+  stayDropTime: 5
 --- !u!4 &2128875255
 Transform:
   m_ObjectHideFlags: 0

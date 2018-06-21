@@ -2,31 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropFloorSearchCharacter : MonoBehaviour {
-    
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag =="NPC")
-        {
-            GetComponentInParent<FallFloor>().setState(FallFloor.CollisionState.Enter);
-        }        
-    }
+public class DropFloorSearchCharacter : MonoBehaviour
+{
 
-    private void OnCollisionStay(Collision col)
+    private void OnTriggerStay(Collider other)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "NPC")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
         {
-            GetComponentInParent<FallFloor>().setState(FallFloor.CollisionState.Stay);
+            GetComponentInParent<FallFloor>().SetState(FallFloor.ColliderState.Stay);
         }
     }
 
-    private void OnCollisionExit(Collision col)
+    private void OnTriggerExit(Collider other)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "NPC")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "NPC")
         {
-            GetComponentInParent<FallFloor>().setState(FallFloor.CollisionState.Exit);
+            GetComponentInParent<FallFloor>().SetState(FallFloor.ColliderState.Absent);
         }
     }
 
-    
 }

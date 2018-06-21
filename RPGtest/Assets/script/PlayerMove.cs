@@ -101,11 +101,9 @@ public class PlayerMove : MonoBehaviour {
                 transform.Rotate(0f, h * rotateSpeed, 0f);
                 animator.SetFloat("Walking", Mathf.Abs(speed));
 
-                velocity = new Vector3(0, 0, speed);
+                velocity = new Vector3(0, rb.velocity.y, speed);
                 velocity = transform.TransformDirection(velocity);
                 rb.velocity = velocity;
-
-                rb.angularVelocity = new Vector3(0f, 0f, 0f);
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
