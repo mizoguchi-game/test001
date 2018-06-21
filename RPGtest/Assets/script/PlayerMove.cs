@@ -58,6 +58,12 @@ public class PlayerMove : MonoBehaviour {
 
     //キャラクターのHPなどのステータスを格納
     private MyStatus myStatus;
+    //キャラクターのコライダー
+    private CapsuleCollider PlayerCollider = new CapsuleCollider();
+
+    //キャラクターのコライダーサイズ
+    
+
 
 	public enum MyState
     {
@@ -76,6 +82,7 @@ public class PlayerMove : MonoBehaviour {
         animator = GetComponent<Animator>();
         shot = GetComponent<Shot>();
         myStatus = transform.GetComponent<MyStatus>();
+        PlayerCollider = GetComponent<CapsuleCollider>();
 	}
 	
 	// Update is called once per frame
@@ -140,7 +147,9 @@ public class PlayerMove : MonoBehaviour {
                 }
             }
         }
-	}
+        PlayerCollider.height = animator.GetFloat("ColliderHeight");
+        PlayerCollider.center = new Vector3(PlayerCollider.center.x,animator.GetFloat("ColliderCenter"), PlayerCollider.center.y);
+    }
 
     public void SetState(MyState myState)
     {
