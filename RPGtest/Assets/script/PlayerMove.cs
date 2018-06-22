@@ -60,12 +60,15 @@ public class PlayerMove : MonoBehaviour {
     private MyStatus myStatus;
     //キャラクターのコライダー
     private CapsuleCollider PlayerCollider = new CapsuleCollider();
+    //defaultのコライダーサイズ
+    private float defColliderheight = 1.3f;
+    private Vector3 defCollidercenter = new Vector3(0f,0.66f,0f);
 
     //キャラクターのコライダーサイズ
-    
 
 
-	public enum MyState
+
+    public enum MyState
     {
         Normal,
         Damage,
@@ -147,8 +150,18 @@ public class PlayerMove : MonoBehaviour {
                 }
             }
         }
-        PlayerCollider.height = animator.GetFloat("ColliderHeight");
-        PlayerCollider.center = new Vector3(PlayerCollider.center.x,animator.GetFloat("ColliderCenter"), PlayerCollider.center.y);
+        
+        if (junpflag == true)
+        {
+            PlayerCollider.height = animator.GetFloat("ColliderHeight");
+            PlayerCollider.center = new Vector3(PlayerCollider.center.x, animator.GetFloat("ColliderCenter"), PlayerCollider.center.z);
+        }
+        else
+        {
+            PlayerCollider.height = defColliderheight;
+            PlayerCollider.center = defCollidercenter;
+        }
+        
     }
 
     public void SetState(MyState myState)
