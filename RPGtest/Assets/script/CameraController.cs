@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
     private Vector3 inFpsPos = new Vector3();
     private bool fpsMode = false;
     private Vector3 tpsPos = new Vector3();
+    private float playerMoveAngle = 0f;
 
     // Use this for initialization
     void Start () {
@@ -19,29 +20,28 @@ public class CameraController : MonoBehaviour {
     }
 	
 	// Update is called once pedr frame
-	void Update () {
+	void FixedUpdate() {
         RotateCameraAngele();
     }
 
     private void RotateCameraAngele()
     {
-
-        float angleX = Input.GetAxis("Mouse X") * rotetaspeed;
-        float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
         float zoom = Input.GetAxis("Mouse ScrollWheel");
+        float angleX = Input.GetAxis("Mouse X") * rotetaspeed + playerMoveAngle * Vector3.Distance(targetPos, transform.position + transform.forward * zoom)*3.15f*2*2;//円の中心回転速度と外周の回転速度同期の方法を調べる
+        float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
+        
 
         transform.position += player.transform.position - targetPos;
         targetPos = player.transform.position;
-
-        Debug.Log(transform.eulerAngles);//回転量取得
 
         if (Vector3.Distance(targetPos, transform.position + transform.forward * zoom) < 1f && fpsMode == false)
         {
             fpsMode = true;
             inFpsPos = transform.position;
             transform.position = targetPos;
+            transform.Rotate(transform.eulerAngles * -1);
         }
-        else if (Vector3.Distance(targetPos, transform.position + transform.forward * zoom) >= 1f && fpsMode == true)
+        else if (zoom < 0 && fpsMode == true)
         {
             fpsMode = false;
             transform.position = inFpsPos;
@@ -60,9 +60,12 @@ public class CameraController : MonoBehaviour {
         {
             //transform.position += transform.forward * zoom;
             transform.Rotate(0f, angleX * Time.deltaTime, 0f);
-        }
+            transform.Rotate(angleY * Time.deltaTime*-1, 0f, 0f);
+        }  
+    }
 
-        
-        
+    public void SetPlayerMove(float angle)
+    {
+        playerMoveAngle = angle;
     }
 }

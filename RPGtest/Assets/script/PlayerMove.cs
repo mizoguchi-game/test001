@@ -64,8 +64,9 @@ public class PlayerMove : MonoBehaviour {
     private float defColliderheight = 1.3f;
     private Vector3 defCollidercenter = new Vector3(0f,0.66f,0f);
 
-    //キャラクターのコライダーサイズ
-
+    //カメラデータ取得
+    [SerializeField] private GameObject mainCamera;
+    private CameraController cameraController;
 
 
     public enum MyState
@@ -86,11 +87,12 @@ public class PlayerMove : MonoBehaviour {
         shot = GetComponent<Shot>();
         myStatus = transform.GetComponent<MyStatus>();
         PlayerCollider = GetComponent<CapsuleCollider>();
+        cameraController = mainCamera.GetComponent<CameraController>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-        Debug.Log(ground);
+        Debug.Log(cameraController);
         if (state == MyState.Normal) {
             if (ground)
             {
@@ -109,6 +111,8 @@ public class PlayerMove : MonoBehaviour {
                 }
 
                 transform.Rotate(0f, h * rotateSpeed, 0f);
+                cameraController.SetPlayerMove(h * rotateSpeed);
+
                 animator.SetFloat("Walking", Mathf.Abs(speed));
 
                 velocity = new Vector3(0, rb.velocity.y, speed);
