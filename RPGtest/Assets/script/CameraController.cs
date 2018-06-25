@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour {
         transform.position += player.transform.position - targetPos;
         targetPos = player.transform.position;
 
+        Debug.Log(transform.eulerAngles);//回転量取得
+
         if (Vector3.Distance(targetPos, transform.position + transform.forward * zoom) < 1f && fpsMode == false)
         {
             fpsMode = true;
@@ -51,13 +53,13 @@ public class CameraController : MonoBehaviour {
         {
             transform.position += transform.forward * zoom;
             transform.LookAt(player.transform.position + new Vector3(0f, Vector3.Distance(targetPos, transform.position) / 3, 0f));
-            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime * rotetaspeed);
-            transform.RotateAround(player.transform.position, transform.right, angleY * Time.deltaTime * rotetaspeed * -1);
+            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime);
+            transform.RotateAround(player.transform.position, transform.right, angleY * Time.deltaTime * -1);
         }
         else
         {
-            transform.position += transform.forward * zoom;
-            transform.Rotate(angleY * Time.deltaTime * rotetaspeed * -1, angleX * Time.deltaTime * rotetaspeed, 0f);
+            //transform.position += transform.forward * zoom;
+            transform.Rotate(0f, angleX * Time.deltaTime, 0f);
         }
 
         
