@@ -111,7 +111,6 @@ public class PlayerMove : MonoBehaviour {
                 }
 
                 transform.Rotate(0f, h * rotateSpeed, 0f);
-                cameraController.SetPlayerMove(h * rotateSpeed);
 
                 animator.SetFloat("Walking", Mathf.Abs(speed));
 

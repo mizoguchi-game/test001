@@ -12,13 +12,14 @@ public class CameraController : MonoBehaviour {
     private bool fpsMode = false;
     private Vector3 tpsPos = new Vector3();
     private float playerMoveAngle = 0f;
-    private float playerRotateSpeed;
+    private float playerAngleY;
+    private float Angular_diff;
 
     // Use this for initialization
     void Start () {
         targetPos = player.transform.position;
         inFpsPos = transform.position;
-        playerRotateSpeed = player.transform.root.GetComponent<PlayerMove>().rotateSpeed;
+        playerAngleY = player.transform.root.eulerAngles.y;
     }
 	
 	// Update is called once pedr frame
@@ -28,11 +29,16 @@ public class CameraController : MonoBehaviour {
 
     private void RotateCameraAngele()
     {
-        
+        Angular_diff = playerAngleY - player.transform.root.eulerAngles.y;
+        playerAngleY = player.transform.root.eulerAngles.y;
 
         float zoom = Input.GetAxis("Mouse ScrollWheel");
-        float angleX = Input.GetAxis("Mouse X") * rotetaspeed;//円の中心回転速度と外周の回転速度同期の方法を調べる
+        float angleX = Input.GetAxis("Mouse X") * rotetaspeed;
         float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
+
+        float Circumference = (Vector3.Distance(targetPos, transform.position + transform.forward * zoom) * 2 * 3.14159f)/360;
+
+        Debug.Log(Circumference);
 
         transform.position += player.transform.position - targetPos;
         targetPos = player.transform.position;
@@ -54,7 +60,7 @@ public class CameraController : MonoBehaviour {
         {
             transform.position += transform.forward * zoom;
             transform.LookAt(player.transform.position + new Vector3(0f, Vector3.Distance(targetPos, transform.position) / 3, 0f));
-            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime);
+            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime + Circumference * Angular_diff);
             transform.RotateAround(player.transform.position, transform.right, angleY * Time.deltaTime * -1);
         }
         else
@@ -63,10 +69,5 @@ public class CameraController : MonoBehaviour {
             transform.Rotate(0f, angleX * Time.deltaTime, 0f);
             transform.Rotate(angleY * Time.deltaTime*-1, 0f, 0f);
         }  
-    }
-
-    public void SetPlayerMove(float angle)
-    {
-        playerMoveAngle = angle;
     }
 }
