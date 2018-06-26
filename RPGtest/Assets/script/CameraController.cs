@@ -12,11 +12,13 @@ public class CameraController : MonoBehaviour {
     private bool fpsMode = false;
     private Vector3 tpsPos = new Vector3();
     private float playerMoveAngle = 0f;
+    private float playerRotateSpeed;
 
     // Use this for initialization
     void Start () {
         targetPos = player.transform.position;
         inFpsPos = transform.position;
+        playerRotateSpeed = player.transform.root.GetComponent<PlayerMove>().rotateSpeed;
     }
 	
 	// Update is called once pedr frame
@@ -26,10 +28,11 @@ public class CameraController : MonoBehaviour {
 
     private void RotateCameraAngele()
     {
-        float zoom = Input.GetAxis("Mouse ScrollWheel");
-        float angleX = Input.GetAxis("Mouse X") * rotetaspeed + playerMoveAngle * Vector3.Distance(targetPos, transform.position + transform.forward * zoom)*3.15f*2*2;//円の中心回転速度と外周の回転速度同期の方法を調べる
-        float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
         
+
+        float zoom = Input.GetAxis("Mouse ScrollWheel");
+        float angleX = Input.GetAxis("Mouse X") * rotetaspeed;//円の中心回転速度と外周の回転速度同期の方法を調べる
+        float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
 
         transform.position += player.transform.position - targetPos;
         targetPos = player.transform.position;
@@ -46,8 +49,6 @@ public class CameraController : MonoBehaviour {
             fpsMode = false;
             transform.position = inFpsPos;
         }
-
-        Debug.Log(Vector3.Distance(targetPos, transform.position + transform.forward * zoom));
 
         if (fpsMode == false) 
         {
