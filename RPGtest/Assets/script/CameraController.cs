@@ -29,16 +29,12 @@ public class CameraController : MonoBehaviour {
 
     private void RotateCameraAngele()
     {
-        Angular_diff = playerAngleY - player.transform.root.eulerAngles.y;
+        Angular_diff = (playerAngleY - player.transform.root.eulerAngles.y)*-1;
         playerAngleY = player.transform.root.eulerAngles.y;
 
         float zoom = Input.GetAxis("Mouse ScrollWheel");
         float angleX = Input.GetAxis("Mouse X") * rotetaspeed;
         float angleY = Input.GetAxis("Mouse Y") * rotetaspeed;
-
-        float Circumference = (Vector3.Distance(targetPos, transform.position + transform.forward * zoom) * 2 * 3.14159f)/360;
-
-        Debug.Log(Circumference);
 
         transform.position += player.transform.position - targetPos;
         targetPos = player.transform.position;
@@ -53,21 +49,24 @@ public class CameraController : MonoBehaviour {
         else if (zoom < 0 && fpsMode == true)
         {
             fpsMode = false;
-            transform.position = inFpsPos;
+            transform.position = transform.position + transform.forward * -1.1f;
         }
 
         if (fpsMode == false) 
         {
             transform.position += transform.forward * zoom;
             transform.LookAt(player.transform.position + new Vector3(0f, Vector3.Distance(targetPos, transform.position) / 3, 0f));
-            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime + Circumference * Angular_diff);
+            transform.RotateAround(player.transform.position, Vector3.up, angleX * Time.deltaTime + Angular_diff);
             transform.RotateAround(player.transform.position, transform.right, angleY * Time.deltaTime * -1);
         }
         else
         {
             //transform.position += transform.forward * zoom;
-            transform.Rotate(0f, angleX * Time.deltaTime, 0f);
-            transform.Rotate(angleY * Time.deltaTime*-1, 0f, 0f);
-        }  
+            transform.Rotate(Vector3.up,angleX * Time.deltaTime + Angular_diff);
+            transform.Rotate(transform.right,angleY * Time.deltaTime*-1);
+            transform.Rotate(new Vector3(0, 0, 1),transform.eulerAngles.z * -1);
+
+            /*上下角-+180度 左右角80度*/
+        }
     }
 }
