@@ -153,18 +153,6 @@ public class PlayerMove : MonoBehaviour {
                 }
             }
         }
-        
-        if (junpflag == true)
-        {
-            PlayerCollider.height = animator.GetFloat("ColliderHeight");
-            PlayerCollider.center = new Vector3(PlayerCollider.center.x, animator.GetFloat("ColliderCenter"), PlayerCollider.center.z);
-        }
-        else
-        {
-            PlayerCollider.height = defColliderheight;
-            PlayerCollider.center = defCollidercenter;
-        }
-        
     }
 
     public void SetState(MyState myState)
