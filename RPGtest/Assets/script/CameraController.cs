@@ -15,10 +15,12 @@ public class CameraController : MonoBehaviour {
     private float playerMoveAngle = 0f;
     private float playerAngleY;//プレイヤーの現在の角度
     private float Angular_diff;//プレイヤーの回転角度差分
-    private float minAngleXLimit = -80;
-    private float maxAngleXLimit = 80;
-    private float minAngleYLimit = -80;
-    private float maxAngleYLimit = 80;
+    [SerializeField] private float minAngleXLimit = -80;
+    [SerializeField] private float maxAngleXLimit = 80;
+    [SerializeField] private float minAngleYLimit = -80;
+    [SerializeField] private float maxAngleYLimit = 80;
+    private float rotateYMinLimit;
+    private float rotateYMaxLimit;
 
     // Use this for initialization
     void Start () {
@@ -42,7 +44,15 @@ public class CameraController : MonoBehaviour {
         float cameraXAngle = 0f;
         float cameraYAngle = 0f;
 
-        Angular_diff = (playerAngleY - player.transform.root.eulerAngles.y) * -1;
+        Angular_diff = (playerAngleY - player.transform.root.gameObject.transform.eulerAngles.y) * -1;
+        if (Angular_diff > 350)
+        {
+            Angular_diff -= 360;
+        }
+        else if(Angular_diff < -350)
+        {
+            Angular_diff += 360;
+        }
         playerAngleY = player.transform.root.gameObject.transform.eulerAngles.y;
 
         transform.position += player.transform.position - targetPos;
@@ -70,33 +80,35 @@ public class CameraController : MonoBehaviour {
         }
         else
         {
-            float rotateYminLimit = (playerAngleY + minAngleYLimit < 0) ? playerAngleY + minAngleYLimit + 360: playerAngleY + minAngleYLimit;
-            float rotateYmaxLimit = (playerAngleY + minAngleYLimit > 360) ? playerAngleY + maxAngleYLimit - 360 : playerAngleY + maxAngleYLimit;
-            Debug.Log("rotateYminLimit:" + rotateYminLimit);
-            Debug.Log("rotateYmaxLimit:" + rotateYmaxLimit);
+            rotateYMinLimit = playerAngleY + minAngleYLimit;
+            rotateYMaxLimit = playerAngleY + maxAngleYLimit;
 
-            // 現在の回転角度を0～360から-180～180に変換
-            float rotateX = (transform.eulerAngles.x > 180) ? transform.eulerAngles.x - 360 : transform.eulerAngles.x;
             float rotateY = transform.eulerAngles.y;
+            float rotateX = (transform.eulerAngles.x > 180) ? transform.eulerAngles.x - 360 : transform.eulerAngles.x;
+
+            if(rotateYMaxLimit > 360 && rotateY < maxAngleYLimit)
+            {
+                Debug.Log("MAXIN" + rotateY);
+                rotateY = rotateY + 360;
+
+            }          
+
+            if(rotateYMinLimit < 0 && rotateY > 360 + minAngleYLimit)
+            {
+                Debug.Log("MININ" + rotateY);
+                rotateY = rotateY - 360;
+
+            }
 
             cameraXAngle = Mathf.Clamp(rotateX + angleY * fpsRotetaspeed * -1, minAngleYLimit, maxAngleYLimit);
-            if (rotateYminLimit > rotateYmaxLimit)
-            {
-                Debug.Log("min大きい");
-                cameraYAngle = Mathf.Clamp(rotateY + angleX * fpsRotetaspeed + Angular_diff, rotateYmaxLimit, rotateYminLimit);
-            }
-            else
-            {
-                Debug.Log("max大きい");
-                cameraYAngle = Mathf.Clamp(rotateY + angleX * fpsRotetaspeed + Angular_diff, rotateYminLimit, rotateYmaxLimit);
-            }
-            Debug.Log("cameraYAngle:" + cameraYAngle);
-
+            cameraYAngle = Mathf.Clamp(rotateY + angleX * fpsRotetaspeed + Angular_diff, rotateYMinLimit+2, rotateYMaxLimit-2);
+            Debug.Log("min:" + rotateYMinLimit + " Y:" + rotateY +" camera:"+cameraYAngle + " max:" + rotateYMaxLimit);
             // 回転角度を-180～180から0～360に変換
             cameraXAngle = (cameraXAngle < 0) ? cameraXAngle + 360 : cameraXAngle;
-
+            cameraYAngle = (cameraYAngle < 0) ? cameraYAngle + 360 : cameraYAngle;
+            cameraYAngle = (cameraYAngle > 360) ? cameraYAngle - 360 : cameraYAngle;
             // 回転角度をオブジェクトに適用
-            transform.rotation = Quaternion.Euler(/*cameraXAngle*/0,cameraYAngle, 0);            
+            transform.rotation = Quaternion.Euler(cameraXAngle, cameraYAngle, 0);
         }
     }
 }

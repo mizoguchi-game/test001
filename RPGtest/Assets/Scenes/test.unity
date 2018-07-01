@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44249132, g: 0.4915684, b: 0.5714111, a: 1}
+  m_IndirectSpecularColor: {r: 0.4424914, g: 0.4915685, b: 0.57141143, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6688,6 +6688,10 @@ MonoBehaviour:
   mainCamera: {fileID: 236316314}
   tpsRotetaspeed: 10
   fpsRotetaspeed: 0.5
+  minAngleXLimit: -80
+  maxAngleXLimit: 80
+  minAngleYLimit: -82
+  maxAngleYLimit: 82
 --- !u!1 &1527965766
 GameObject:
   m_ObjectHideFlags: 0
