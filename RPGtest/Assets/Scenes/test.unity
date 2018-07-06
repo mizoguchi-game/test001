@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 186334663}
   - component: {fileID: 186334662}
   - component: {fileID: 186334661}
+  - component: {fileID: 186334664}
   m_Layer: 5
   m_Name: Button (5)
   m_TagString: Untagged
@@ -631,6 +632,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186334659}
+--- !u!114 &186334664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186334659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 4
+  spendPoint: 5
+  skillTitle: "\u653B\u64831"
+  skillInformation: "\u653B\u6483\u30925\uFF05UP\u3059\u308B"
+  text: {fileID: 193130510}
 --- !u!1 &193130508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,7 +1310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 410, y: -198}
+  m_AnchoredPosition: {x: 410, y: -284}
   m_SizeDelta: {x: 819, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &283759121
@@ -4745,6 +4763,7 @@ GameObject:
   - component: {fileID: 844417071}
   - component: {fileID: 844417070}
   - component: {fileID: 844417069}
+  - component: {fileID: 844417072}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -4847,6 +4866,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 844417067}
+--- !u!114 &844417072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844417067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 1
+  spendPoint: 10
+  skillTitle: "\u653B\u6483UP2"
+  skillInformation: "\u653B\u6483\u529B\u30925\uFF05UP\u3055\u305B\u308B\u3002"
+  text: {fileID: 193130510}
 --- !u!1 &854432251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5805,6 +5841,7 @@ GameObject:
   - component: {fileID: 1057542454}
   - component: {fileID: 1057542453}
   - component: {fileID: 1057542452}
+  - component: {fileID: 1057542455}
   m_Layer: 5
   m_Name: Button (4)
   m_TagString: Untagged
@@ -5907,6 +5944,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1057542450}
+--- !u!114 &1057542455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057542450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 5
+  spendPoint: 20
+  skillTitle: "\u653B\u6483UP2"
+  skillInformation: "\u653B\u6483\u309220\uFF05UP\u3059\u308B"
+  text: {fileID: 193130510}
 --- !u!1 &1081990460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5918,6 +5972,7 @@ GameObject:
   - component: {fileID: 1081990463}
   - component: {fileID: 1081990462}
   - component: {fileID: 1081990461}
+  - component: {fileID: 1081990465}
   m_Layer: 5
   m_Name: SkillUI
   m_TagString: Untagged
@@ -6003,6 +6058,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1081990465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081990460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9db457d260c5674b8b6e5dabaa6e94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPoint: 100
+  skills: 
+  skillParams:
+  - {fileID: 1999099367}
+  - {fileID: 844417072}
+  - {fileID: 1993152837}
+  - {fileID: 1607257360}
+  - {fileID: 1057542455}
+  - {fileID: 186334664}
+  skillText: {fileID: 193130510}
 --- !u!1 &1095610184
 GameObject:
   m_ObjectHideFlags: 0
@@ -9337,6 +9413,7 @@ GameObject:
   - component: {fileID: 1607257359}
   - component: {fileID: 1607257358}
   - component: {fileID: 1607257357}
+  - component: {fileID: 1607257360}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -9439,6 +9516,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1607257355}
+--- !u!114 &1607257360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1607257355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 3
+  spendPoint: 20
+  skillTitle: "\u653B\u6483\u529BUP4"
+  skillInformation: "\u653B\u6483\u529B\u309210\uFF05UP\u3059\u308B"
+  text: {fileID: 193130510}
 --- !u!1 &1618342390
 GameObject:
   m_ObjectHideFlags: 0
@@ -11500,6 +11594,7 @@ GameObject:
   - component: {fileID: 1993152836}
   - component: {fileID: 1993152835}
   - component: {fileID: 1993152834}
+  - component: {fileID: 1993152837}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -11602,6 +11697,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1993152832}
+--- !u!114 &1993152837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1993152832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 2
+  spendPoint: 15
+  skillTitle: "\u653B\u6483\u529BUP3"
+  skillInformation: "\u653B\u6483\u529B\u529B\u30925\uFF05UP\u3059\u308B"
+  text: {fileID: 193130510}
 --- !u!1 &1993416974
 GameObject:
   m_ObjectHideFlags: 0
@@ -11644,6 +11756,7 @@ GameObject:
   - component: {fileID: 1999099366}
   - component: {fileID: 1999099365}
   - component: {fileID: 1999099364}
+  - component: {fileID: 1999099367}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -11746,6 +11859,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1999099362}
+--- !u!114 &1999099367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1999099362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8b080f6f3cb45418618a7865152717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 1081990465}
+  type: 0
+  spendPoint: 5
+  skillTitle: "\u653B\u6483UP\uFF11"
+  skillInformation: "\u653B\u6483\u529B\u30925\uFF05UP\u3059\u308B"
+  text: {fileID: 193130510}
 --- !u!1 &2005966781
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,8 @@ public enum SkillType
     attack2,
     attack3,
     attack4,
-    attack5
+    attack5,
+    attack6
 }
 
 public class SkillSystem : MonoBehaviour {
@@ -71,15 +72,15 @@ public class SkillSystem : MonoBehaviour {
         {
             return skills[(int)SkillType.attack2];
         }
-        else if (type == SkillType.attack5)
+        else if (type == SkillType.attack6)
         {
-            return skills[(int)SkillType.attack4];
+            return skills[(int)SkillType.attack5];
         }
         return true;
     }
 
     private void CheckOnOff() {
-        foreach (var skillPalam in skillParams)
+        foreach (var skillParam in skillParams)
         {
             skillParam.CheckOnOff();
         }

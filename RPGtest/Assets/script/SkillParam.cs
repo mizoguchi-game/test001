@@ -30,7 +30,7 @@ public class SkillParam : MonoBehaviour {
         if (skillSystem.Check(type,spendPoint))
         {
             skillSystem.SetSkill(type, spendPoint);
-            changeButtonColor(new Coloe(0f, 0f, 1f, 1f));
+            ChangeButtonColor(new Color(0f, 0f, 1f, 1f));
             text.text = skillTitle + "を覚えた";
         }
         else
@@ -57,5 +57,23 @@ public class SkillParam : MonoBehaviour {
     public void SetText()
     {
         text.text = skillTitle + ":消費スキルポイント" + spendPoint + "\n" + skillInformation;
+    }
+
+    public void ResetText()
+    {
+        text.text = "";
+    }
+    //ボタンの色変更
+    public void ChangeButtonColor(Color color)
+    {
+        //ボタンコンポーネントを取得
+        Button button = gameObject.GetComponent<Button>();
+        //ボタンのカラー情報を取得(一時変数を作成し、色情報を変えてからそれをbutton.colorsに設定。じゃないとエラーになる)
+        ColorBlock cb = button.colors;
+        //取得済みのスキルボタンの色を変える。
+        cb.normalColor = color;
+        cb.pressedColor = color;
+        //ボタンのカラー情報を設定
+        button.colors = cb;
     }
 }
