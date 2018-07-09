@@ -26,6 +26,7 @@ public class SkillSystem : MonoBehaviour {
         //スキル数分の配列を確保
         skills = new bool[skillParams.Length];
         SetText();
+        gameObject.SetActive(false);
     }
 
     //スキルを覚える

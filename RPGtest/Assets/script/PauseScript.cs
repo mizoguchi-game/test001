@@ -14,6 +14,9 @@ public class PauseScript : MonoBehaviour {
     [SerializeField]
     private GameObject PropertyUI;
 
+    //スキルツリー
+    [SerializeField] private GameObject skillTreeUI;
+
     private RectTransform title;
     private RectTransform main;
     private RectTransform equip;
@@ -42,7 +45,7 @@ public class PauseScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        //ポーズ画面表示
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (instancePauseUI == null)
@@ -57,7 +60,7 @@ public class PauseScript : MonoBehaviour {
                 Time.timeScale = 1f;
             }
         }
-
+        //アイテム表示
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (PropertyUI.activeSelf == false && instancePauseUI != null)
@@ -70,7 +73,20 @@ public class PauseScript : MonoBehaviour {
             }
 
         }
+        //スキルツリー表示
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (skillTreeUI.activeSelf == false && instancePauseUI != null)
+            {
+                skillTreeUI.SetActive(true);
+            }
+            else
+            {
+                skillTreeUI.SetActive(false);
+            }
+        }
 
+        //アイテム表示系設定
         if (PropertyUI.activeSelf == true)
         {
             if (width != Screen.width)
