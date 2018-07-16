@@ -94,9 +94,10 @@ public class PlayerMove : MonoBehaviour {
 	void FixedUpdate() {
         Debug.Log(cameraController);
         if (state == MyState.Normal) {
+            Debug.Log(ground);
             if (ground)
             {
-
+                Debug.Log(ground);
                 float h = Input.GetAxis("Horizontal");
                 float v = Input.GetAxis("Vertical");
 
